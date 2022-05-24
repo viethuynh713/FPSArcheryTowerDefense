@@ -19,19 +19,6 @@ public class ExplosionBarrel : MonoBehaviour
         {
             Enemy rigg = nearyby.GetComponent<Enemy>();
             
-
-            if (rigg != null)
-            {
-                
-                rigg.TakeDamage(barrelExplosionDamage);
-            }
-        }
-
-        Collider[] collidersDmg = Physics.OverlapSphere(transform.position, radius);
-        
-
-        foreach (Collider nearyby in collidersDmg)
-        {
             Rigidbody rb = nearyby.GetComponent<Rigidbody>();
            
             if (rb != null)
@@ -39,7 +26,14 @@ public class ExplosionBarrel : MonoBehaviour
                 
                 rb.AddExplosionForce(expForce, transform.position, radius);
             }
+
+            if (rigg != null)
+            {
+                
+                rigg.TakeDamage(barrelExplosionDamage,false);
+            }
         }
+
     }
 
     public void Explosion()

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum collisionType { head, body };
 public class Enemy : MonoBehaviour
 {
-    public enum collisionType { head, body};
     public collisionType dmgType;
 
     public float startSpeed = 10f;
@@ -42,10 +42,9 @@ public class Enemy : MonoBehaviour
     {
         if (isSlowed)
         {
-            currentSlowTime = slowTime;
             speed = speed * (100 - slowPercent) / 100;
             currentSlowTime -= Time.deltaTime;
-            
+
         }
 
         if (currentSlowTime == 0)
@@ -56,35 +55,47 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool isHead)
     {
-        health -= damage;
+        Debug.Log("TakeDam");
+        Debug.Log(damage);
+        if (isHead)
+        {
+            float newDamage = damage * 1.5f;
+            health -= newDamage;
+            healthBar.fillAmount = health / startHealth;
+        }
+        else
+        {
+            health -= damage;
 
-        healthBar.fillAmount = health/ startHealth;
+            healthBar.fillAmount = health / startHealth;
 
+        }
         if (health <= 0 && !isDead)
         {
             Die();
         }
     }
 
-    public void TakeDamageHead(float damage)
-    {
-        float headDmg = (float)(damage * 1.5);
+    // public void TakeDamageHead(float damage)
+    // {
+    //     float headDmg = (float)(damage * 1.5);
 
-        health -= headDmg;
+    //     health -= headDmg;
 
-        healthBar.fillAmount = health / startHealth;
+    //     healthBar.fillAmount = health / startHealth;
 
-        if (health <= 0 && !isDead)
-        {
-            Die();
-        }
-    }
+    //     if (health <= 0 && !isDead)
+    //     {
+    //         Die();
+    //     }
+    // }
 
     public void Slowdown()
     {
-        isSlowed = true;  
+        currentSlowTime = slowTime;
+        isSlowed = true;
     }
 
     void Die()
@@ -101,4 +112,5 @@ public class Enemy : MonoBehaviour
 
         Destroy(gameObject);
     }
+
 }

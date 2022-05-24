@@ -17,34 +17,30 @@ public class BompArrowScript : MonoBehaviour
         {
             Enemy rigg = nearyby.GetComponent<Enemy>();
 
-            if(rigg != null)
-            {
-                rigg.TakeDamage(damage);
-            }
-        }
-
-        Collider[] collidersDmg = Physics.OverlapSphere(transform.position, radius);
-
-        foreach (Collider nearyby in collidersDmg)
-        {
             Rigidbody rb = nearyby.GetComponent<Rigidbody>();
 
             if (rb != null)
             {
                 rb.AddExplosionForce(expForce, transform.position, radius);
             }
+            // if(rigg != null)
+            // {
+            //     rigg.TakeDamage(damage);
+            // }
         }
+
+
     }
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.GetComponent<Enemy>())
-        {  
-            GameObject _exp = Instantiate(exp, transform.position, transform.rotation);
-            Destroy(_exp, 3);
-            Knockback();
-            Destroy(gameObject);
-        }
+        // if (collider.GetComponent<Enemy>())
+        // {  
+        //     GameObject _exp = Instantiate(exp, transform.position, transform.rotation);
+        //     Destroy(_exp, 3);
+        //     Knockback();
+        //     Destroy(gameObject);
+        // }
 
         if (collider.GetComponent<ExplosionBarrel>())
         {
