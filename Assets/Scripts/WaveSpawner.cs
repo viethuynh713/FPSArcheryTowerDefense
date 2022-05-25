@@ -9,8 +9,6 @@ public class WaveSpawner : MonoBehaviour
 
     public Waves[] waves;
 
-    public Transform enemyPrefab;
-
     public Transform spawnPoint;
 
     public float timeBetweenWaves = 5f;
@@ -18,8 +16,6 @@ public class WaveSpawner : MonoBehaviour
 
     public Text waveCountdownText;
     private int waveIndex = 0;
-
-    public GameManager gameManager;
 
     void Start()
     {
@@ -29,7 +25,7 @@ public class WaveSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.isGameOver)
+        if (GameManager.instance.isGameOver)
             return;
 
         if (EnemiesAlive > 0)
@@ -39,7 +35,7 @@ public class WaveSpawner : MonoBehaviour
 
         if (waveIndex == waves.Length)
         { 
-            gameManager.WinLevel();
+            GameManager.instance.WinLevel();
             this.enabled = false;
         }
 
@@ -54,8 +50,8 @@ public class WaveSpawner : MonoBehaviour
         countdown -= Time.deltaTime;
 
         countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
-
-        waveCountdownText.text = string.Format("{0:00.00}", countdown);
+        
+        waveCountdownText.text = (waveIndex + 1).ToString() + " / " + waves.Length.ToString();
     }
 
     IEnumerator SpawnWave()

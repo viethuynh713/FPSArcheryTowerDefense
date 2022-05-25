@@ -5,8 +5,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public static bool isGameOver;
+    public bool isGameOver;
     public bool isWin;
+    
+    public float castleHealth = 1000f;
 
     [Header("UI Objects")]
     public GameObject gameOverUI;
@@ -17,12 +19,17 @@ public class GameManager : MonoBehaviour
     private Look look;
 
 
-    void Start()
+    private void Awake() 
     {
+
         isGameOver = false;
         isWin = false;
         bs = FindObjectOfType<BowScript>();
         look = FindObjectOfType<Look>();
+        if (instance == null)
+        {
+            instance = this;
+        }
         
     }
 

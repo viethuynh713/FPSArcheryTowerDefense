@@ -7,12 +7,9 @@ public enum collisionType { head, body };
 public class Enemy : MonoBehaviour
 {
     public float startSpeed = 10f;
+    public float hitDamage = 10f;
 
     public float speed;
-    [Header("Slow Effect")]
-    public float slowTime = 3;
-    public float currentSlowTime;
-    public float slowPercent;
 
     private Transform target;
     private int wavepointIndex = 0;
@@ -28,6 +25,10 @@ public class Enemy : MonoBehaviour
 
     private bool isDead = false;
 
+    [Header("Slow Effect")]
+    public float slowTime = 3;
+    public float currentSlowTime;
+    public float slowPercent;
     private bool isSlowed = false;
     [Header("Fire Effect")]
     [SerializeField]
@@ -58,6 +59,11 @@ public class Enemy : MonoBehaviour
             health -= Time.deltaTime * damBurn;
             healthBar.fillAmount = health / startHealth;
             currentBurnTime -= Time.deltaTime;
+            if (health <= 0 && !isDead)
+            {
+                Die();
+            }
+
         }
 
         if (currentSlowTime <= 0)
@@ -101,12 +107,13 @@ public class Enemy : MonoBehaviour
     }
     public void BurnEffect()
     {
+
         currentBurnTime = burnTime;
         Quaternion rot = Quaternion.Euler(-90, 0, 0);
         GameObject burn = Instantiate(burnEffect, transform.position, rot, gameObject.transform);
         isBurning = true;
         Destroy(burn, burnTime);
-        
+
     }
 
     void Die()
