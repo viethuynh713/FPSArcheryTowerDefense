@@ -7,6 +7,7 @@ TagManager:
   - head
   - IceArrow
   - FireArrow
+  - Enemy
   layers:
   - Default
   - TransparentFX
