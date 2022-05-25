@@ -18,7 +18,7 @@ public class EnemyMovement : MonoBehaviour
     public void Start()
     {
         targetWp = Waypoints.points[0];
-        target = Waypoints.points[0].transform.position;
+        
         agent = GetComponent<NavMeshAgent>();
         eAttack = GetComponent<EnemyAttack>();
 
