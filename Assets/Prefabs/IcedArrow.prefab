@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7070283896692580201}
   - component: {fileID: 5031709531044676345}
   - component: {fileID: 9052956083635125002}
+  - component: {fileID: 6499136429258245012}
   m_Layer: 0
   m_Name: IcedArrow
   m_TagString: IceArrow
@@ -256,6 +257,18 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 1
   m_Emitting: 1
+--- !u!114 &6499136429258245012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8960625873756202457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e5ef4af18b04eb4aa8fefa14624cf69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &717290580416663826
 PrefabInstance:
   m_ObjectHideFlags: 0

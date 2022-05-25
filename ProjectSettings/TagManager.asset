@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - head
+  - IceArrow
+  - FireArrow
   layers:
   - Default
   - TransparentFX

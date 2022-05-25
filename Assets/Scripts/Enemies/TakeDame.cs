@@ -26,6 +26,7 @@ public class TakeDame : MonoBehaviour
             {
                 enemy.TakeDamage(damage, type == collisionType.head ? true : false);
             }
+            // Destroy(other.gameObject);
         // }
 
     }

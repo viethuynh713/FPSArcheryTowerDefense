@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: -6227551992979521856}
   - component: {fileID: 2448769772640115386}
   - component: {fileID: 7047066836494697248}
+  - component: {fileID: 7238285533908323327}
   m_Layer: 0
   m_Name: BompArrow
   m_TagString: FireArrow
@@ -215,3 +216,15 @@ MonoBehaviour:
   exp: {fileID: 2788075076919213421, guid: 18a80dd35fb7ee646866ab13ed50726d, type: 3}
   expForce: 800
   radius: 8
+--- !u!114 &7238285533908323327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8960625873756202457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e5ef4af18b04eb4aa8fefa14624cf69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public enum collisionType { head, body };
 public class Enemy : MonoBehaviour
 {
-    public collisionType dmgType;
-
     public float startSpeed = 10f;
 
     public float speed;
@@ -61,8 +59,9 @@ public class Enemy : MonoBehaviour
         Debug.Log(damage);
         if (isHead)
         {
-            float newDamage = damage * 1.5f;
-            health -= newDamage;
+            // float newDamage = damage * 1.5f;
+            // health -= newDamage;
+            health = 0;
             healthBar.fillAmount = health / startHealth;
         }
         else

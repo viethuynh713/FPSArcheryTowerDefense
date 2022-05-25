@@ -80,6 +80,7 @@ public class BowScript : MonoBehaviour
                 break;
         }          
     }
+  
     public void DefaultArrow()
     {
         if (Input.GetKey(fireButton) && _charge < chargeMax)
@@ -104,7 +105,7 @@ public class BowScript : MonoBehaviour
                 arrow.transform.LookAt(arrowLookAtPos25);
                 arrow.GetComponent<Rigidbody>().AddForce(spawn.forward * _charge, ForceMode.Impulse);
                 _charge = 0;
-                Destroy(arrow, 2f);
+                // Destroy(arrow,2f);
 
                 Debug.Log("20%");
 
@@ -118,7 +119,7 @@ public class BowScript : MonoBehaviour
                 arrow.GetComponent<Rigidbody>().AddForce(spawn.forward * _charge, ForceMode.Impulse);
 
                 _charge = 0;
-                Destroy(arrow, 2f);
+                // Destroy(arrow,2f);
 
                 Debug.Log("50%");
             }
@@ -128,7 +129,7 @@ public class BowScript : MonoBehaviour
                 arrow.GetComponent<Rigidbody>().AddForce(spawn.forward * _charge, ForceMode.Impulse);
 
                 _charge = 0;
-                Destroy(arrow, 2f);
+                // Destroy(arrow,2f);
 
             }
             else if (_charge > 80)
@@ -137,7 +138,7 @@ public class BowScript : MonoBehaviour
                 arrow.GetComponent<Rigidbody>().AddForce(spawn.forward * _charge, ForceMode.Impulse);
                 //arrow.transform.Rotate(-_charge * 15 * Time.deltaTime, 0f, 0f, Space.Self);
                 _charge = 0;
-                Destroy(arrow, 2f);
+                // Destroy(arrow,2f);
 
             }
         }
@@ -171,7 +172,7 @@ public class BowScript : MonoBehaviour
                 arrow.transform.LookAt(arrowLookAtPos25);
                 arrow.GetComponent<Rigidbody>().AddForce(spawn.forward * _charge, ForceMode.Impulse);
                 _charge = 0;
-                Destroy(arrow, 2f);
+                Destroy(arrow,2f);
 
                 Debug.Log("20%");
 
@@ -185,7 +186,7 @@ public class BowScript : MonoBehaviour
                 arrow.GetComponent<Rigidbody>().AddForce(spawn.forward * _charge, ForceMode.Impulse);
 
                 _charge = 0;
-                Destroy(arrow, 2f);
+                Destroy(arrow,2f);
 
                 Debug.Log("50%");
             }
@@ -195,7 +196,7 @@ public class BowScript : MonoBehaviour
                 arrow.GetComponent<Rigidbody>().AddForce(spawn.forward * _charge, ForceMode.Impulse);
 
                 _charge = 0;
-                Destroy(arrow, 2f);
+                Destroy(arrow,2f);
 
             }
             else if (_charge > 80)
@@ -204,7 +205,7 @@ public class BowScript : MonoBehaviour
                 arrow.GetComponent<Rigidbody>().AddForce(spawn.forward * _charge, ForceMode.Impulse);
                 //arrow.transform.Rotate(-_charge * 15 * Time.deltaTime, 0f, 0f, Space.Self);
                 _charge = 0;
-                Destroy(arrow, 2f);
+                Destroy(arrow,2f);
 
             }
         }
