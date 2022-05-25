@@ -11,14 +11,10 @@ public class TakeDame : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         
-
-        // if (gameObject.GetComponentInParent<Enemy>())
-        // {
             Enemy enemy = gameObject.GetComponentInParent<Enemy>();
             
             if (other.tag == "IceArrow")
             {
-                // Debug.Log("Ice");
                 enemy.Slowdown();
                 enemy.TakeDamage(damage, type == collisionType.head ? true : false);
             }
@@ -27,9 +23,6 @@ public class TakeDame : MonoBehaviour
                 enemy.BurnEffect();
                 enemy.TakeDamage(damage, type == collisionType.head ? true : false);
             }
-            // Destroy(other.gameObject);
-        // }
-
     }
 }
 

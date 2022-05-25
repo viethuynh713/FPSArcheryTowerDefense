@@ -100,9 +100,8 @@ public class Enemy : MonoBehaviour
     }
 
 
-    public void Slowdown()
-    {   
-        // Debug.Log("Before change speed: " + speed);
+    public void Slowdown() { 
+
         speed = speed * (100 - slowPercent) / 100;
         currentSlowTime = slowTime;
         // Debug.Log("After change speed: " + speed);

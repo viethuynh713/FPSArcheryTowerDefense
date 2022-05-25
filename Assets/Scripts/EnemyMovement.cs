@@ -1,53 +1,89 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(Enemy))]
 public class EnemyMovement : MonoBehaviour
 {
-    private Transform target;
-    private int wavepointIndex = 0;
+    NavMeshAgent agent;
+    
+    int waypointIndex;
+    Vector3 target;
+    Transform targetWp;
+    EnemyAttack eAttack;
 
-    private Enemy enemy;
 
-    [HideInInspector]
-    // public PlayerStats ps;
 
     public void Start()
     {
-        enemy = GetComponent<Enemy>();
+        targetWp = Waypoints.points[0];
+        target = Waypoints.points[0].transform.position;
+        agent = GetComponent<NavMeshAgent>();
+        eAttack = GetComponent<EnemyAttack>();
 
-        target = Waypoints.points[0];
-
-        // ps = FindObjectOfType<PlayerStats>();
+        UpdatePath();
     }
 
-    public void Update()
+    void Update()
     {
-        Vector3 dir = target.position - transform.position;
-
-        transform.Translate(dir.normalized * enemy.speed * Time.deltaTime, Space.World);
-
-        if (Vector3.Distance(transform.position, target.position) <= 0.4f)
+        if (Vector3.Distance(transform.position, targetWp.position) < 1)
         {
-            GetNextWaypoint();
+            IncreaseWaypoint();
+            UpdatePath();
         }
-
-        enemy.speed = enemy.startSpeed;
     }
 
-    public void GetNextWaypoint()
+    void UpdatePath()
     {
-        if (wavepointIndex >= Waypoints.points.Length - 1)
-        { 
-            EndPath();
-            return;
-        }
-
-        wavepointIndex++;
-        
-        target = Waypoints.points[wavepointIndex];
+        targetWp.position = Waypoints.points[waypointIndex].transform.position;
+        agent.SetDestination(target);
     }
+
+    void IncreaseWaypoint()
+    {
+        waypointIndex++;
+
+        if(waypointIndex == Waypoints.points.Length)
+        {
+            waypointIndex = 0;
+            //Put the enemy attack code here
+            eAttack.Attack();
+
+        }
+    }
+
+
+    // private Transform target;
+    // private int wavepointIndex = 0;
+
+    // private Enemy enemy;
+
+    // [HideInInspector]
+    // public PlayerStats ps;
+
+    // public void Start()
+    // {
+    //     enemy = GetComponent<Enemy>();
+
+    //     target = Waypoints.points[0];
+
+    //     ps = FindObjectOfType<PlayerStats>();
+    // }
+
+    // public void Update()
+    // {
+    //     Vector3 dir = target.position - transform.position;
+
+    //     transform.Translate(dir.normalized * enemy.speed * Time.deltaTime, Space.World);
+
+    //     if (Vector3.Distance(transform.position, target.position) <= 0.4f)
+    //     {
+    //         GetNextWaypoint();
+    //     }
+
+        
+    // }
 
     public void EndPath()
     { 
@@ -55,4 +91,24 @@ public class EnemyMovement : MonoBehaviour
         WaveSpawner.EnemiesAlive--;
         Destroy(gameObject);
     }
+
+    // public void GetNextWaypoint()
+    // {
+    //     if (wavepointIndex >= Waypoints.points.Length - 1)
+    //     { 
+    //         EndPath();
+    //         return;
+    //     }
+
+    //     wavepointIndex++;
+        
+    //     target = Waypoints.points[wavepointIndex];
+    // }
+
+    // public void EndPath()
+    // { 
+    //     PlayerStats.Lives--;
+    //     WaveSpawner.EnemiesAlive--;
+    //     Destroy(gameObject);
+
 }
