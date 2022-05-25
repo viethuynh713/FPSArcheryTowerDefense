@@ -2569,7 +2569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2329a267013fdfc47b7213fa659b1ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMoney: 400
+  startMoney: 10000
   startLives: 3
   playerLivesT: {fileID: 1912371587}
 --- !u!114 &836597995

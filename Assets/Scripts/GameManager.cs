@@ -4,22 +4,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
     public static bool isGameOver;
     public bool isWin;
 
+    [Header("UI Objects")]
     public GameObject gameOverUI;
     public GameObject completeLevelUI;
 
     public SceneFader sceneFader;
+    private BowScript bs;
+    private Look look;
 
-    [HideInInspector]
-    public BowScript bs;
-
-    [HideInInspector]
-    public Look look;
-
-    [HideInInspector]
-    public PlayerStats ps;
 
     void Start()
     {

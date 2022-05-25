@@ -24,7 +24,9 @@ public class TakeDame : MonoBehaviour
             }
             if (other.tag == "FireArrow")
             {
+                enemy.BurnEffect();
                 enemy.TakeDamage(damage, type == collisionType.head ? true : false);
+                other.GetComponent<BompArrowScript>().Knockback();
             }
             // Destroy(other.gameObject);
         // }

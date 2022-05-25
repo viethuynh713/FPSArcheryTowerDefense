@@ -15,6 +15,7 @@ public class ArrowScript : MonoBehaviour
         //     stats.TakeDamage(damage);
         // }
         
+        
     }
 
 

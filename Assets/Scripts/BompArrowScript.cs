@@ -9,7 +9,7 @@ public class BompArrowScript : MonoBehaviour
 
     public float expForce, radius;
 
-    void Knockback()
+    public void Knockback()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
 
@@ -23,10 +23,10 @@ public class BompArrowScript : MonoBehaviour
             {
                 rb.AddExplosionForce(expForce, transform.position, radius);
             }
-            // if(rigg != null)
-            // {
-            //     rigg.TakeDamage(damage);
-            // }
+            if(rigg != null)
+            {
+                rigg.BurnEffect();
+            }
         }
 
 

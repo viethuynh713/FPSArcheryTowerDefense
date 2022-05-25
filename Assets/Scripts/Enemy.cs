@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     public float startSpeed = 10f;
 
     public float speed;
-
+    [Header("Slow Effect")]
     public float slowTime = 3;
     public float currentSlowTime;
     public float slowPercent;
@@ -29,6 +29,15 @@ public class Enemy : MonoBehaviour
     private bool isDead = false;
 
     private bool isSlowed = false;
+    [Header("Fire Effect")]
+    [SerializeField]
+    private GameObject burnEffect;
+    private bool isBurning = false;
+    [SerializeField]
+    private float damBurn = 10;
+    [SerializeField]
+    private float burnTime = 3f;
+    private float currentBurnTime;
 
     void Start()
     {
@@ -38,29 +47,36 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        if (isSlowed)
+        if (isSlowed && currentSlowTime > 0)
         {
             speed = speed * (100 - slowPercent) / 100;
             currentSlowTime -= Time.deltaTime;
 
         }
+        if (isBurning && currentBurnTime > 0)
+        {
+            health -= Time.deltaTime * damBurn;
+            healthBar.fillAmount = health / startHealth;
+            currentBurnTime -= Time.deltaTime;
+        }
 
-        if (currentSlowTime == 0)
+        if (currentSlowTime <= 0)
         {
             speed = startSpeed;
 
             isSlowed = false;
         }
+        if (currentBurnTime <= 0)
+        {
+            isBurning = false;
+        }
     }
 
     public void TakeDamage(float damage, bool isHead)
     {
-        Debug.Log("TakeDam");
-        Debug.Log(damage);
+
         if (isHead)
         {
-            // float newDamage = damage * 1.5f;
-            // health -= newDamage;
             health = 0;
             healthBar.fillAmount = health / startHealth;
         }
@@ -77,24 +93,20 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // public void TakeDamageHead(float damage)
-    // {
-    //     float headDmg = (float)(damage * 1.5);
-
-    //     health -= headDmg;
-
-    //     healthBar.fillAmount = health / startHealth;
-
-    //     if (health <= 0 && !isDead)
-    //     {
-    //         Die();
-    //     }
-    // }
 
     public void Slowdown()
     {
         currentSlowTime = slowTime;
         isSlowed = true;
+    }
+    public void BurnEffect()
+    {
+        currentBurnTime = burnTime;
+        Quaternion rot = Quaternion.Euler(-90, 0, 0);
+        GameObject burn = Instantiate(burnEffect, transform.position, rot, gameObject.transform);
+        isBurning = true;
+        Destroy(burn, burnTime);
+        
     }
 
     void Die()
