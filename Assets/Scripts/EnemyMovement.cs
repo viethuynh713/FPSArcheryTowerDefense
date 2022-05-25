@@ -9,11 +9,11 @@ public class EnemyMovement : MonoBehaviour
     public float timeBetweenAtk = 1.5f;
     public float atkCountdown;
     public bool canAtk;
+    public bool isAttacking;
 
     NavMeshAgent agent;
     
     int waypointIndex;
-    Vector3 target;
     Transform targetWp;
     EnemyAttack eAttack;
 
@@ -22,6 +22,8 @@ public class EnemyMovement : MonoBehaviour
     public void Start()
     {
         canAtk = false;
+
+        isAttacking = false;
 
         targetWp = Waypoints.points[0];
         
@@ -33,25 +35,25 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
-        if (canAtk = false && atkCountdown > 0)
+        if (canAtk == false && atkCountdown > 0 && isAttacking == true)
         {
             atkCountdown -= Time.deltaTime;
-            Debug.Log(atkCountdown.ToString());
+            
         }
-        if(atkCountdown <= 0)
-        {
-            canAtk = true;
+        if(atkCountdown <= 0) {
+            isAttacking = false;
         }
-        if(canAtk = true)
+        if(canAtk == true && Vector3.Distance(transform.position, targetWp.position) <= 3f && isAttacking == false)
         {
             AtkTheCastle();
         }
         
 
-        if (Vector3.Distance(transform.position, targetWp.position) <= 2)
+        if (Vector3.Distance(transform.position, targetWp.position) <= 3f && canAtk == false && isAttacking == false)
         {
-            agent.isStopped = true;
             canAtk = true;
+            agent.velocity = Vector3.zero;
+            agent.isStopped = true;
         }
     }
 
@@ -63,9 +65,9 @@ public class EnemyMovement : MonoBehaviour
 
     void AtkTheCastle()
     {
-        Debug.Log("Atk");
         eAttack.Attack();
         canAtk = false;
+        isAttacking = true;
         atkCountdown = timeBetweenAtk;
     }
 
@@ -101,12 +103,12 @@ public class EnemyMovement : MonoBehaviour
         
     // }
 
-    public void EndPath()
-    { 
+    //public void EndPath()
+    //{ 
         // PlayerStats.Lives--;
-        WaveSpawner.EnemiesAlive--;
-        Destroy(gameObject);
-    }
+        //WaveSpawner.EnemiesAlive--;
+        //Destroy(gameObject);
+    //}
 
     // public void GetNextWaypoint()
     // {

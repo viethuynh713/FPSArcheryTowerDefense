@@ -16,6 +16,8 @@ public class EnemyAttack : MonoBehaviour
 
     public void Attack()
     {
+        Debug.Log("Chem");
+
         anim.Play("MeleeEnemyAttack");
 
         Collider[] colliders = Physics.OverlapSphere(attackPos.transform.position, radius);
