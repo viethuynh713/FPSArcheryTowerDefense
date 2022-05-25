@@ -408,7 +408,7 @@ GameObject:
   - component: {fileID: 2292990147060475224}
   - component: {fileID: 7920494129006276958}
   - component: {fileID: 3919933723415625575}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -485,10 +485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae8f2640d8eed2848903f679e6f1c9cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenAtk: 1.5
-  atkCountdown: 0
-  canAtk: 0
-  isAttacking: 0
+  targetWp: {fileID: 0}
 --- !u!54 &989910106601416944
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -562,6 +559,12 @@ MonoBehaviour:
   enemyAttackDmg: 10
   radius: 4
   attackPos: {fileID: 2885197928765537878}
+  agent: {fileID: 0}
+  timeBetweenAtk: 1.5
+  atkCountdown: 0
+  canAtk: 0
+  isAttacking: 0
+  distanceToTarget: 3
 --- !u!1 &8440857820073171204
 GameObject:
   m_ObjectHideFlags: 0
