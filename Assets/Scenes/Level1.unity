@@ -452,9 +452,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b4c43ca59676c4eb691b9bcfc40402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 320375349}
-  maxHealth: 1000
-  touchCastle: 0
 --- !u!1 &138957055
 GameObject:
   m_ObjectHideFlags: 0
@@ -3085,9 +3082,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2329a267013fdfc47b7213fa659b1ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMoney: 10000
-  startLives: 3
-  playerLivesT: {fileID: 1912371587}
 --- !u!114 &836597995
 MonoBehaviour:
   m_ObjectHideFlags: 0

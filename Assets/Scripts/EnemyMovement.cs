@@ -6,6 +6,10 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Enemy))]
 public class EnemyMovement : MonoBehaviour
 {
+    public float timeBetweenAtk = 1.5f;
+    public float atkCountdown;
+    public bool canAtk;
+
     NavMeshAgent agent;
     
     int waypointIndex;
@@ -17,6 +21,8 @@ public class EnemyMovement : MonoBehaviour
 
     public void Start()
     {
+        canAtk = false;
+
         targetWp = Waypoints.points[0];
         
         agent = GetComponent<NavMeshAgent>();
@@ -27,30 +33,40 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
-        if (Vector3.Distance(transform.position, targetWp.position) < 1)
+        if (canAtk = false && atkCountdown > 0)
         {
-            IncreaseWaypoint();
-            UpdatePath();
+            atkCountdown -= Time.deltaTime;
+            Debug.Log(atkCountdown.ToString());
+        }
+        if(atkCountdown <= 0)
+        {
+            canAtk = true;
+        }
+        if(canAtk = true)
+        {
+            AtkTheCastle();
+        }
+        
+
+        if (Vector3.Distance(transform.position, targetWp.position) <= 2)
+        {
+            agent.isStopped = true;
+            canAtk = true;
         }
     }
 
     void UpdatePath()
     {
         targetWp.position = Waypoints.points[waypointIndex].transform.position;
-        agent.SetDestination(target);
+        agent.SetDestination(targetWp.position);
     }
 
-    void IncreaseWaypoint()
+    void AtkTheCastle()
     {
-        waypointIndex++;
-
-        if(waypointIndex == Waypoints.points.Length)
-        {
-            waypointIndex = 0;
-            //Put the enemy attack code here
-            eAttack.Attack();
-
-        }
+        Debug.Log("Atk");
+        eAttack.Attack();
+        canAtk = false;
+        atkCountdown = timeBetweenAtk;
     }
 
 

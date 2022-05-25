@@ -6,8 +6,7 @@ public class EnemyAttack : MonoBehaviour
 {
     public float enemyAttackDmg;
     public float radius;
-
-    public Animator anim;
+    private Animator anim;
     public GameObject attackPos;
 
     void Start()
@@ -16,10 +15,11 @@ public class EnemyAttack : MonoBehaviour
     }
 
     public void Attack()
-    {     
+    {
+        anim.Play("MeleeEnemyAttack");
+
         Collider[] colliders = Physics.OverlapSphere(attackPos.transform.position, radius);
         
-
         foreach (Collider nearyby in colliders)
         {
             if(nearyby.gameObject.tag == "Castle")
