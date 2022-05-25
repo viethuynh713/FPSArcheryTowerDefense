@@ -8,6 +8,7 @@ TagManager:
   - IceArrow
   - FireArrow
   - Enemy
+  - Castle
   layers:
   - Default
   - TransparentFX

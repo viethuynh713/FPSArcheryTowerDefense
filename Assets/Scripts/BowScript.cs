@@ -51,7 +51,7 @@ public class BowScript : MonoBehaviour
             return;
         }
 
-        if (PlayerStats.Money < 100)
+        if (GameManager.instance.money < 100)
         {
             isUsingBomp = false;
         } 
@@ -60,7 +60,7 @@ public class BowScript : MonoBehaviour
         {
             isUsingBomp = false;
         }
-        else if (Input.GetKeyDown(KeyCode.Mouse1) && isUsingBomp == false && PlayerStats.Money >= 100)
+        else if (Input.GetKeyDown(KeyCode.Mouse1) && isUsingBomp == false && GameManager.instance.money >= 100)
         {
             isUsingBomp = true;
         }
@@ -84,7 +84,7 @@ public class BowScript : MonoBehaviour
         {
             case true:
 
-                if(PlayerStats.Money >= 100)
+                if(GameManager.instance.money >= 100)
                 {
                     //BompArrow();
 

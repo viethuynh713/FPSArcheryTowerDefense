@@ -191,14 +191,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startSpeed: 1
+  hitDamage: 10
   speed: 0
-  slowTime: 3
-  currentSlowTime: 0
-  slowPercent: 0
   healthBar: {fileID: 144040001}
   startHealth: 100
   dropMoney: 50
   deathEffect: {fileID: 2540749679192381147, guid: 49f0b91c727b2654cb4bca95d30e2b97, type: 3}
+  slowTime: 3
+  currentSlowTime: 0
+  slowPercent: 0
   burnEffect: {fileID: 0}
   damBurn: 10
   burnTime: 3
@@ -456,14 +457,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startSpeed: 5
-  speed: 0
-  slowTime: 3
-  currentSlowTime: 0
-  slowPercent: 0
+  hitDamage: 10
+  speed: 10
   healthBar: {fileID: 144040001}
   startHealth: 100
   dropMoney: 50
   deathEffect: {fileID: 2540749679192381147, guid: 49f0b91c727b2654cb4bca95d30e2b97, type: 3}
+  slowTime: 3
+  currentSlowTime: 3
+  slowPercent: 50
   burnEffect: {fileID: 949625472091121969, guid: d75dc78220f7966469d3d09535268e98, type: 3}
   damBurn: 10
   burnTime: 3

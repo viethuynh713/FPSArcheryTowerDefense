@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
 {
     public float startSpeed = 10f;
     public float hitDamage = 10f;
-
+    [SerializeField]
     public float speed;
 
     private Transform target;
@@ -27,7 +27,8 @@ public class Enemy : MonoBehaviour
 
     [Header("Slow Effect")]
     public float slowTime = 3;
-    public float currentSlowTime;
+    public float currentSlowTime ;
+    [SerializeField]
     public float slowPercent;
     private bool isSlowed = false;
     [Header("Fire Effect")]
@@ -50,7 +51,6 @@ public class Enemy : MonoBehaviour
     {
         if (isSlowed && currentSlowTime > 0)
         {
-            speed = speed * (100 - slowPercent) / 100;
             currentSlowTime -= Time.deltaTime;
 
         }
@@ -101,8 +101,11 @@ public class Enemy : MonoBehaviour
 
 
     public void Slowdown()
-    {
+    {   
+        // Debug.Log("Before change speed: " + speed);
+        speed = speed * (100 - slowPercent) / 100;
         currentSlowTime = slowTime;
+        // Debug.Log("After change speed: " + speed);
         isSlowed = true;
     }
     public void BurnEffect()
@@ -120,7 +123,7 @@ public class Enemy : MonoBehaviour
     {
         isDead = true;
 
-        PlayerStats.Money += dropMoney;
+        GameManager.instance.money += dropMoney;
 
         GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
 

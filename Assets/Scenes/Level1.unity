@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 98243187}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Castle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -454,6 +454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 320375349}
   maxHealth: 1000
+  touchCastle: 0
 --- !u!1 &138957055
 GameObject:
   m_ObjectHideFlags: 0
@@ -2735,9 +2736,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGameOver: 0
   isWin: 0
+  level: 0
+  money: 0
   castleHealth: 1000
   gameOverUI: {fileID: 444184558}
   completeLevelUI: {fileID: 1445889140}
+  healthBarOfCastle: {fileID: 320375349}
   sceneFader: {fileID: 3370687969966657989}
 --- !u!114 &836597994
 MonoBehaviour:

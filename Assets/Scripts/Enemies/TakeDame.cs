@@ -26,7 +26,6 @@ public class TakeDame : MonoBehaviour
             {
                 enemy.BurnEffect();
                 enemy.TakeDamage(damage, type == collisionType.head ? true : false);
-                other.GetComponent<BompArrowScript>().Knockback();
             }
             // Destroy(other.gameObject);
         // }

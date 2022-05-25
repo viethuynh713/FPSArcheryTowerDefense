@@ -16,7 +16,7 @@ public class GameOver : MonoBehaviour
 
     private void OnEnable()
     {
-        roundText.text = PlayerStats.Rounds.ToString();
+        roundText.text = GameManager.instance.level.ToString();
     }
 
     public void Retry()

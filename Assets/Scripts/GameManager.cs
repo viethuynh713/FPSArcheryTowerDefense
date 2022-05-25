@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public bool isGameOver;
     public bool isWin;
-    
+    public int level = 0;
+    public int money = 0;
     public float castleHealth = 1000f;
 
     [Header("UI Objects")]
     public GameObject gameOverUI;
     public GameObject completeLevelUI;
+    public Slider healthBarOfCastle;
 
     public SceneFader sceneFader;
     private BowScript bs;
@@ -21,6 +24,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake() 
     {
+        healthBarOfCastle.maxValue = 1000f;
+        healthBarOfCastle.minValue = 0;
+        healthBarOfCastle.value = castleHealth;
 
         isGameOver = false;
         isWin = false;
@@ -40,7 +46,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if (PlayerStats.Lives <= 0)
+        if (castleHealth <= 0)
         {
             EndGame();
         }
@@ -87,5 +93,14 @@ public class GameManager : MonoBehaviour
 
         look.isTimeStopped = isGameOver;
         
+    }
+    public void CastleTakeDamage(float damage)
+    {
+        castleHealth -= damage;
+        healthBarOfCastle.value = castleHealth;
+        if (castleHealth <= 0)
+        {
+            EndGame();
+        }
     }
 }

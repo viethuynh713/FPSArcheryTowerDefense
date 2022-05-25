@@ -11,7 +11,7 @@ public class EnemyMovement : MonoBehaviour
     private Enemy enemy;
 
     [HideInInspector]
-    public PlayerStats ps;
+    // public PlayerStats ps;
 
     public void Start()
     {
@@ -19,7 +19,7 @@ public class EnemyMovement : MonoBehaviour
 
         target = Waypoints.points[0];
 
-        ps = FindObjectOfType<PlayerStats>();
+        // ps = FindObjectOfType<PlayerStats>();
     }
 
     public void Update()
@@ -51,7 +51,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void EndPath()
     { 
-        PlayerStats.Lives--;
+        // PlayerStats.Lives--;
         WaveSpawner.EnemiesAlive--;
         Destroy(gameObject);
     }

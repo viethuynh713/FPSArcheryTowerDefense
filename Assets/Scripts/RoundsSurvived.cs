@@ -20,7 +20,7 @@ public class RoundsSurvived : MonoBehaviour
 
         yield return new WaitForSeconds(0.7f);
 
-        while(round < PlayerStats.Rounds)
+        while(round < GameManager.instance.level)
         {
             round++;
             roundsText.text = round.ToString();

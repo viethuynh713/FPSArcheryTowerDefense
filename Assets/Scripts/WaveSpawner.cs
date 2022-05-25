@@ -56,7 +56,7 @@ public class WaveSpawner : MonoBehaviour
 
     IEnumerator SpawnWave()
     {
-        PlayerStats.Rounds++;
+        GameManager.instance.level++;
 
         Waves wave = waves[waveIndex];
 
