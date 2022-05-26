@@ -408,6 +408,7 @@ GameObject:
   - component: {fileID: 2292990147060475224}
   - component: {fileID: 7920494129006276958}
   - component: {fileID: 3919933723415625575}
+  - component: {fileID: 2251458072764896592}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -551,13 +552,36 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8440857819620202354}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ca9a4f02c2cedf4bbb510a960b1826f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAttackDmg: 10
   radius: 4
+  anim: {fileID: 0}
+  attackPos: {fileID: 2885197928765537878}
+  agent: {fileID: 0}
+  timeBetweenAtk: 1.5
+  atkCountdown: 0
+  canAtk: 0
+  isAttacking: 0
+  distanceToTarget: 3
+--- !u!114 &2251458072764896592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8440857819620202354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 842c9726340142d44a886dac96285240, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyAttackDmg: 0
+  radius: 0
+  anim: {fileID: 0}
   attackPos: {fileID: 2885197928765537878}
   agent: {fileID: 0}
   timeBetweenAtk: 1.5

@@ -7,7 +7,7 @@ public class EnemyAttack : MonoBehaviour
 {
     public float enemyAttackDmg;
     public float radius;
-    private Animator anim;
+    public Animator anim;
     public GameObject attackPos;
     public NavMeshAgent agent;
 
@@ -17,16 +17,16 @@ public class EnemyAttack : MonoBehaviour
     public bool isAttacking;
     public float distanceToTarget;
 
-    void Start()
+    public void Start()
     {
-        
+
         canAtk = false;
         agent = GetComponent<NavMeshAgent>();
         isAttacking = false;
         anim = GetComponent<Animator>();
     }
 
-    private void Update()
+    public void Update()
     {
         if (canAtk == false && atkCountdown > 0 && isAttacking == true)
         {
@@ -41,38 +41,16 @@ public class EnemyAttack : MonoBehaviour
         {
             AtkTheCastle();
         }
+        CheckDistance();
 
-
-        if (Vector3.Distance(transform.position, GetComponent<EnemyMovement>().targetWp.position) <= distanceToTarget && canAtk == false && isAttacking == false)
-        {
-            canAtk = true;
-            // 
-            agent.isStopped = true;
-
-            agent.velocity = Vector3.zero;
-        }
-        if(Vector3.Distance(transform.position, GetComponent<EnemyMovement>().targetWp.position) > distanceToTarget)
-        {
-            agent.isStopped = false;
-        }
     }
-    public void Attack()
+    public virtual void CheckDistance()
     {
 
-        anim.Play("MeleeEnemyAttack");
-
-        Collider[] colliders = Physics.OverlapSphere(attackPos.transform.position, radius);
-
-        foreach (Collider nearyby in colliders)
-        {
-            if (nearyby.gameObject.tag == "Castle")
-            {
-        Debug.Log("Chem");
-                GameManager.instance.castleHealth -= 10;
-            }
-        }
     }
-        void AtkTheCastle()
+    public virtual void Attack() { }
+
+    void AtkTheCastle()
     {
         Attack();
         canAtk = false;
