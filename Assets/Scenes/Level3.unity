@@ -3021,7 +3021,7 @@ MonoBehaviour:
   castleHealth: 1000
   gameOverUI: {fileID: 444184558}
   completeLevelUI: {fileID: 1445889140}
-  healthBarOfCastle: {fileID: 301250011}
+  healthBarOfCastle: {fileID: 0}
   sceneFader: {fileID: 3370687969966657989}
 --- !u!114 &836597994
 MonoBehaviour:
