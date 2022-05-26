@@ -212,7 +212,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f3df21dd3ffaac4dbf187653c12ff16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
   exp: {fileID: 2540749679192381147, guid: d6a1d6b5446843745985961860dfa1a0, type: 3}
   expForce: 800
   radius: 8

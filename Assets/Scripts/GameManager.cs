@@ -136,6 +136,16 @@ public class GameManager : MonoBehaviour
             IceQuantityText.text = IceQuantity.ToString();
         }
     }
+    public void DecsIceArrow()
+    {
+            IceQuantity--;
+            IceQuantityText.text = IceQuantity.ToString();
+    }
+    public void DecsFireArrow()
+    {
+        FireQuantity--;
+        FireQuantityText.text = FireQuantity.ToString();
+    }
     public void BuyFireArrow()
     {
         if (money >= 50)

@@ -9,25 +9,6 @@ public class IcedArrow : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        // if (collider.GetComponent<Enemy>())
-        // {
-
-        //     Rigidbody rb = collider.GetComponent<Rigidbody>();
-
-        //     if(rb != null)
-        //     {
-        //         Vector3 direction = collider.transform.position - transform.position;
-        //         direction.y = 0;
-        //         rb.AddForce(-direction.normalized * knockbackForce, ForceMode.Impulse);
-
-        //         Enemy stats = collider.GetComponent<Enemy>();
-        //         stats.Slowdown();
-        //         stats.TakeDamage(damage);
-                
-        //     }
-
-            
-        // }
 
         if (collider.GetComponent<ExplosionBarrel>())
         {
