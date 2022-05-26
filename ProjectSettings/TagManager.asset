@@ -9,6 +9,7 @@ TagManager:
   - FireArrow
   - Enemy
   - Castle
+  - NormalArrow
   layers:
   - Default
   - TransparentFX

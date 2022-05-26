@@ -26,19 +26,19 @@ public class Enemy : MonoBehaviour
     private bool isDead = false;
 
     [Header("Slow Effect")]
-    public float slowTime = 3;
+    // public float slowTime = 3;
     public float currentSlowTime ;
-    [SerializeField]
-    public float slowPercent;
+    // [SerializeField]
+    // public float slowPercent;
     private bool isSlowed = false;
     [Header("Fire Effect")]
     [SerializeField]
     private GameObject burnEffect;
     private bool isBurning = false;
+    // [SerializeField]
+    // private float damBurn = 10;
     [SerializeField]
-    private float damBurn = 10;
-    [SerializeField]
-    private float burnTime = 3f;
+    // private float burnTime = 3f;
     private float currentBurnTime;
 
     
@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
         }
         if (isBurning && currentBurnTime > 0)
         {
-            health -= Time.deltaTime * damBurn;
+            health -= Time.deltaTime * GameManager.instance.FireDamBurn;
             healthBar.fillAmount = health / startHealth;
             currentBurnTime -= Time.deltaTime;
             if (health <= 0 && !isDead)
@@ -107,19 +107,19 @@ public class Enemy : MonoBehaviour
 
     public void Slowdown() { 
 
-        speed = speed * (100 - slowPercent) / 100;
-        currentSlowTime = slowTime;
+        speed = speed * (100 - GameManager.instance.IceRateSlow) / 100;
+        currentSlowTime = GameManager.instance.IceTimeSlowDuration;
         // Debug.Log("After change speed: " + speed);
         isSlowed = true;
     }
     public void BurnEffect()
     {
 
-        currentBurnTime = burnTime;
+        currentBurnTime = GameManager.instance.FireTimeBurnDuration;
         Quaternion rot = Quaternion.Euler(-90, 0, 0);
         GameObject burn = Instantiate(burnEffect, transform.position, rot, gameObject.transform);
         isBurning = true;
-        Destroy(burn, burnTime);
+        Destroy(burn, GameManager.instance.FireTimeBurnDuration);
 
     }
 

@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public Slider healthBarOfCastle;
 
     [Header("Ice Arrows")]
-    public int IceQuantity = 0;
+    public int IceQuantity = 5;
     public TMP_Text IceQuantityText;
     public float IceRateSlow = 5f;
     public TMP_Text IceRateSlowText;
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     public TMP_Text IceTimeSlowDurationText;
 
     [Header("Fire Arrows")]
-    public int FireQuantity = 0;
+    public int FireQuantity = 5;
     public TMP_Text FireQuantityText;
     public float FireTimeBurnDuration = 1;
     public TMP_Text FireTimeBurnDurationText;
@@ -135,6 +135,16 @@ public class GameManager : MonoBehaviour
             IceQuantity++;
             IceQuantityText.text = IceQuantity.ToString();
         }
+    }
+    public void DecsIceArrow()
+    {
+            IceQuantity--;
+            IceQuantityText.text = IceQuantity.ToString();
+    }
+    public void DecsFireArrow()
+    {
+        FireQuantity--;
+        FireQuantityText.text = FireQuantity.ToString();
     }
     public void BuyFireArrow()
     {

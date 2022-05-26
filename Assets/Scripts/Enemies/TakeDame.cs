@@ -23,6 +23,11 @@ public class TakeDame : MonoBehaviour
                 enemy.BurnEffect();
                 enemy.TakeDamage(damage, type == collisionType.head ? true : false);
             }
+            if (other.tag == "NormalArrow")
+            {
+                enemy.TakeDamage(damage, type == collisionType.head ? true : false);
+            }
+
     }
 }
 

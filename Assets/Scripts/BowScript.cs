@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BowScript : MonoBehaviour
 {
+    public enum ArrowType { Ice, Fire, Normal };
     float _charge;
 
     public float chargeMax;
@@ -12,16 +13,16 @@ public class BowScript : MonoBehaviour
     public KeyCode fireButton;
 
     public Transform spawn;
-    public GameObject arrowObject;
-    public GameObject arrowObjWhileHolding;
+    public GameObject iceArrowObject;
+    public GameObject iceArrowObjWhileHolding;
 
-    public GameObject bompArrowObject;
-    public GameObject bompArrowObjWhileHolding;
+    public GameObject fireArrowObject;
+    public GameObject fireArrowObjWhileHolding;
+    public GameObject normalArrowObject;
+    public GameObject normalArrowObjWhileHolding;
 
-    public Transform orientRef;
-    public Transform arrowLookAtPos25;
-    public Transform arrowLookAtPos50;
-    public Transform arrowLookAtPos75;
+    private ArrowType currentArrowType;
+
 
     [HideInInspector]
     public PauseMenu ps;
@@ -31,10 +32,11 @@ public class BowScript : MonoBehaviour
 
     public Animator animator;
     public Camera fpsCam;
-    
+
 
     void Start()
     {
+        currentArrowType = ArrowType.Normal;
 
         ps = FindObjectOfType<PauseMenu>();
 
@@ -51,72 +53,51 @@ public class BowScript : MonoBehaviour
             return;
         }
 
-        if (GameManager.instance.money < 100)
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            isUsingBomp = false;
-        } 
+            if (currentArrowType == ArrowType.Normal)
+            {
+                if (GameManager.instance.IceQuantity > 0)
+                {
+                    currentArrowType = ArrowType.Ice;
+                }
+                else if (GameManager.instance.FireQuantity > 0)
+                {
+                    currentArrowType = ArrowType.Fire;
+                }
+            }
 
-        if (Input.GetKeyDown(KeyCode.Mouse1) && isUsingBomp == true)
-        {
-            isUsingBomp = false;
-        }
-        else if (Input.GetKeyDown(KeyCode.Mouse1) && isUsingBomp == false && GameManager.instance.money >= 100)
-        {
-            isUsingBomp = true;
+            else if (currentArrowType == ArrowType.Ice && GameManager.instance.FireQuantity > 0)
+            {
+                currentArrowType = ArrowType.Fire;
+            }
+            else
+            {
+                currentArrowType = ArrowType.Normal;
+            }
         }
 
-        Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f,0.5f,0f));
+
+        Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         RaycastHit hit;
 
         Vector3 targetPoint;
 
-        if(Physics.Raycast(ray,out hit)){
+        if (Physics.Raycast(ray, out hit))
+        {
             targetPoint = hit.point;
 
         }
-        else{
+        else
+        {
             targetPoint = ray.GetPoint(75);
         }
 
         Vector3 direction = targetPoint - spawn.position;
 
-        switch (isUsingBomp)
+        switch (currentArrowType)
         {
-            case true:
-
-                if(GameManager.instance.money >= 100)
-                {
-                    //BompArrow();
-
-                    
-
-                    if (Input.GetKey(fireButton) && _charge < chargeMax)
-                    {
-
-                        animator.Play("BowHolding");
-
-                        _charge += Time.deltaTime * chargeRate;
-
-                        bompArrowObjWhileHolding.SetActive(true);
-                    }
-
-                    if(Input.GetKeyUp(fireButton))
-                    {
-
-                        animator.Play("BowRelease");
-                        bompArrowObjWhileHolding.SetActive(false);
-                        GameObject arrow = Instantiate(bompArrowObject, spawn.position, Quaternion.identity);
-                        arrow.transform.forward = direction.normalized;
-                        arrow.GetComponent<Rigidbody>().AddForce(direction.normalized * _charge, ForceMode.Impulse);
-                        _charge = 0;
-
-                    }
-                }
-                break;
-
-            case false:
-
-                //DefaultArrow();
+            case ArrowType.Fire:
 
                 if (Input.GetKey(fireButton) && _charge < chargeMax)
                 {
@@ -125,157 +106,98 @@ public class BowScript : MonoBehaviour
 
                     _charge += Time.deltaTime * chargeRate;
 
-                    arrowObjWhileHolding.SetActive(true);
+                    fireArrowObjWhileHolding.SetActive(true);
                 }
 
-                if(Input.GetKeyUp(fireButton))
+                if (Input.GetKeyUp(fireButton))
                 {
-
+                    // Debug.Log("Fire");
+                    GameManager.instance.DecsFireArrow();
+                    CheckQuantity();
                     animator.Play("BowRelease");
-                    arrowObjWhileHolding.SetActive(false);
-                    GameObject arrow = Instantiate(arrowObject, spawn.position, Quaternion.identity);
+                    fireArrowObjWhileHolding.SetActive(false);
+                    GameObject arrow = Instantiate(fireArrowObject, spawn.position, Quaternion.identity);
                     arrow.transform.forward = direction.normalized;
                     arrow.GetComponent<Rigidbody>().AddForce(direction.normalized * _charge, ForceMode.Impulse);
                     _charge = 0;
 
                 }
 
-                
-
-                
-                
-
                 break;
-        }          
+
+            case ArrowType.Ice:
+                {
+                    if (Input.GetKey(fireButton) && _charge < chargeMax)
+                    {
+
+                        animator.Play("BowHolding");
+
+                        _charge += Time.deltaTime * chargeRate;
+
+                        iceArrowObjWhileHolding.SetActive(true);
+                    }
+
+                    if (Input.GetKeyUp(fireButton))
+                    {
+
+                        // Debug.Log("Ice arrow");
+                        GameManager.instance.DecsIceArrow();
+                        CheckQuantity();
+                        animator.Play("BowRelease");
+                        iceArrowObjWhileHolding.SetActive(false);
+                        GameObject arrow = Instantiate(iceArrowObject, spawn.position, Quaternion.identity);
+                        arrow.transform.forward = direction.normalized;
+                        arrow.GetComponent<Rigidbody>().AddForce(direction.normalized * _charge, ForceMode.Impulse);
+                        _charge = 0;
+                    }
+
+                    break;
+                }
+            case ArrowType.Normal:
+                {
+                    if (Input.GetKey(fireButton) && _charge < chargeMax)
+                    {
+
+                        animator.Play("BowHolding");
+
+                        _charge += Time.deltaTime * chargeRate;
+
+                        normalArrowObjWhileHolding.SetActive(true);
+                    }
+
+                    if (Input.GetKeyUp(fireButton))
+                    {
+                        // Debug.Log("Normal");
+
+                        animator.Play("BowRelease");
+                        normalArrowObjWhileHolding.SetActive(false);
+                        GameObject arrow = Instantiate(normalArrowObject, spawn.position, Quaternion.identity);
+                        arrow.transform.forward = direction.normalized;
+                        arrow.GetComponent<Rigidbody>().AddForce(direction.normalized * _charge, ForceMode.Impulse);
+                        _charge = 0;
+                        Debug.Log(arrow);
+                    }
+
+                    break;
+                }
+
+        }
     }
-  
-    // public void DefaultArrow()
-    // {
-    //     if (Input.GetKey(fireButton) && _charge < chargeMax)
-    //     {
-    //         animator.Play("BowHolding");
-    //         _charge += Time.deltaTime * chargeRate;
-    //         arrowObjWhileHolding.SetActive(true);
+    public void CheckQuantity()
+    {
+        if (GameManager.instance.IceQuantity <= 0 && GameManager.instance.FireQuantity <= 0)
+        {
+            currentArrowType = ArrowType.Normal;
+        }
+        if (GameManager.instance.IceQuantity <= 0 && GameManager.instance.FireQuantity > 0)
+        {
+            currentArrowType = ArrowType.Fire;
+        }
+        if (GameManager.instance.IceQuantity > 0 && GameManager.instance.FireQuantity <= 0)
+        {
+            currentArrowType = ArrowType.Ice;
+        }
+    }
 
-    //     }
-
-    //     if (Input.GetKeyUp(fireButton))
-    //     {
-    //         animator.Play("BowRelease");
-
-    //         arrowObjWhileHolding.SetActive(false);
-    //         GameObject arrow = Instantiate(arrowObject, spawn.position, Quaternion.identity);
-    //         Debug.Log(_charge.ToString());
-
-    //         if (_charge <= 20)
-    //         {
-
-    //             arrow.transform.LookAt(arrowLookAtPos25);
-    //             arrow.GetComponent<Rigidbody>().AddForce(spawn.forward * _charge, ForceMode.Impulse);
-    //             _charge = 0;
-    //             // Destroy(arrow,2f);
-
-    //             Debug.Log("20%");
-
-
-
-    //         }
-    //         else if (_charge > 20 && _charge <= 40)
-    //         {
-
-    //             arrow.transform.LookAt(arrowLookAtPos50);
-    //             arrow.GetComponent<Rigidbody>().AddForce(spawn.forward * _charge, ForceMode.Impulse);
-
-    //             _charge = 0;
-    //             // Destroy(arrow,2f);
-
-    //             Debug.Log("50%");
-    //         }
-    //         else if (_charge > 40 && _charge <= 80)
-    //         {
-    //             arrow.transform.LookAt(arrowLookAtPos75);
-    //             arrow.GetComponent<Rigidbody>().AddForce(spawn.forward * _charge, ForceMode.Impulse);
-
-    //             _charge = 0;
-    //             // Destroy(arrow,2f);
-
-    //         }
-    //         else if (_charge > 80)
-    //         {
-    //             arrow.transform.LookAt(orientRef);
-    //             arrow.GetComponent<Rigidbody>().AddForce(spawn.forward * _charge, ForceMode.Impulse);
-    //             //arrow.transform.Rotate(-_charge * 15 * Time.deltaTime, 0f, 0f, Space.Self);
-    //             _charge = 0;
-    //             // Destroy(arrow,2f);
-
-    //         }
-    //     }
-    // }
-
-    // public void BompArrow()
-    // {
-    //     if (Input.GetKey(fireButton) && _charge < chargeMax)
-    //     {
-    //         animator.Play("BowHolding");
-    //         _charge += Time.deltaTime * chargeRate;
-    //         bompArrowObjWhileHolding.SetActive(true);
-
-    //     }
-
-    //     if (Input.GetKeyUp(fireButton))
-    //     {
-    //         PlayerStats.Money -= 100;
-
-    //         animator.Play("BowRelease");
-
-    //         bompArrowObjWhileHolding.SetActive(false);
-
-
-    //         GameObject arrow = Instantiate(bompArrowObject, spawn.position, Quaternion.identity);
-    //         Debug.Log(_charge.ToString());
-
-    //         if (_charge <= 20)
-    //         {
-
-    //             arrow.transform.LookAt(arrowLookAtPos25);
-    //             arrow.GetComponent<Rigidbody>().AddForce(spawn.forward * _charge, ForceMode.Impulse);
-    //             _charge = 0;
-    //             Destroy(arrow,2f);
-
-    //             Debug.Log("20%");
-
-
-
-    //         }
-    //         else if (_charge > 20 && _charge <= 40)
-    //         {
-
-    //             arrow.transform.LookAt(arrowLookAtPos50);
-    //             arrow.GetComponent<Rigidbody>().AddForce(spawn.forward * _charge, ForceMode.Impulse);
-
-    //             _charge = 0;
-    //             Destroy(arrow,2f);
-
-    //             Debug.Log("50%");
-    //         }
-    //         else if (_charge > 40 && _charge <= 80)
-    //         {
-    //             arrow.transform.LookAt(arrowLookAtPos75);
-    //             arrow.GetComponent<Rigidbody>().AddForce(spawn.forward * _charge, ForceMode.Impulse);
-
-    //             _charge = 0;
-    //             Destroy(arrow,2f);
-
-    //         }
-    //         else if (_charge > 80)
-    //         {
-    //             arrow.transform.LookAt(orientRef);
-    //             arrow.GetComponent<Rigidbody>().AddForce(spawn.forward * _charge, ForceMode.Impulse);
-    //             //arrow.transform.Rotate(-_charge * 15 * Time.deltaTime, 0f, 0f, Space.Self);
-    //             _charge = 0;
-    //             Destroy(arrow,2f);
-
-    //         }
-    //     }
-    // }
+   
 }
