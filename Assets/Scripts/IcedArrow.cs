@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class IcedArrow : MonoBehaviour
 {
-    public int damage;
-    public float knockbackForce;
 
     void OnTriggerEnter(Collider collider)
     {
