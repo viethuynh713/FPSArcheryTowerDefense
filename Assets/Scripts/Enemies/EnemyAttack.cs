@@ -16,14 +16,18 @@ public class EnemyAttack : MonoBehaviour
     public bool canAtk;
     public bool isAttacking;
     public float distanceToTarget;
+    public Castle castle;
+    public GameObject enemyLookAt;
 
     public void Start()
     {
-
         canAtk = false;
         agent = GetComponent<NavMeshAgent>();
         isAttacking = false;
         anim = GetComponent<Animator>();
+        castle = GetComponent<Castle>();
+        enemyLookAt = GetComponent<Castle>().gameObject;
+
     }
 
     public void Update()

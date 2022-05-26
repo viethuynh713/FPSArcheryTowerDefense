@@ -1,14 +1,14 @@
-// using System.Collections;
-// using System.Collections.Generic;
-// using UnityEngine;
-// using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
 
-// public class Castle : MonoBehaviour
-// {
+public class Castle : MonoBehaviour
+{
 //     public Slider healthBar;
 //     public float maxHealth = 1000f;
 //     private bool touchCastle = false;
-    
+
 
 //     void Start()
 //     {
@@ -22,7 +22,7 @@
 //     {
 //         if (touchCastle)
 //         {
-            
+
 //         }
 //     }
 //     private void OnCollisionEnter(Collision other) {
@@ -39,4 +39,4 @@
 //             }
 //         }
 //     }
-// }
+}
