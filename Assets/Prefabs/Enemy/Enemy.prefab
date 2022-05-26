@@ -197,12 +197,9 @@ MonoBehaviour:
   startHealth: 100
   dropMoney: 50
   deathEffect: {fileID: 2540749679192381147, guid: 49f0b91c727b2654cb4bca95d30e2b97, type: 3}
-  slowTime: 3
   currentSlowTime: 0
-  slowPercent: 0
   burnEffect: {fileID: 0}
-  damBurn: 10
-  burnTime: 3
+  currentBurnTime: 0
 --- !u!1 &1997031361
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,6 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d46a0f39462b5040a3c1ca8f6cd91ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  exp: {fileID: 2788075076919213421, guid: 18a80dd35fb7ee646866ab13ed50726d, type: 3}
   type: 0
   damage: 10
 --- !u!1 &8440857819620202354
@@ -470,12 +468,9 @@ MonoBehaviour:
   startHealth: 100
   dropMoney: 50
   deathEffect: {fileID: 2540749679192381147, guid: 49f0b91c727b2654cb4bca95d30e2b97, type: 3}
-  slowTime: 3
   currentSlowTime: 3
-  slowPercent: 50
   burnEffect: {fileID: 949625472091121969, guid: d75dc78220f7966469d3d09535268e98, type: 3}
-  damBurn: 10
-  burnTime: 3
+  currentBurnTime: 0
 --- !u!114 &4607884454178249323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,6 +710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d46a0f39462b5040a3c1ca8f6cd91ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  exp: {fileID: 2788075076919213421, guid: 18a80dd35fb7ee646866ab13ed50726d, type: 3}
   type: 1
   damage: 10
 --- !u!1001 &2885197928765503732

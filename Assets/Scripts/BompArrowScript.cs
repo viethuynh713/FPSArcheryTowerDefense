@@ -44,7 +44,9 @@ public class BompArrowScript : MonoBehaviour
             EB.Explosion();
         }
         else{
+            GameObject _exp = Instantiate(exp, transform.position, transform.rotation);
             Knockback();
+            Destroy(gameObject);
         }
     }
 }
