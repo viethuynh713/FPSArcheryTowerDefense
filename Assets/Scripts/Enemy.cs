@@ -41,14 +41,19 @@ public class Enemy : MonoBehaviour
     private float burnTime = 3f;
     private float currentBurnTime;
 
+    
+
     void Start()
     {
         speed = startSpeed;
         health = startHealth;
+        
     }
 
     void Update()
     {
+        
+
         if (isSlowed && currentSlowTime > 0)
         {
             currentSlowTime -= Time.deltaTime;
