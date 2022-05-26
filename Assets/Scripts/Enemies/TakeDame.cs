@@ -17,16 +17,21 @@ public class TakeDame : MonoBehaviour
             {
                 enemy.Slowdown();
                 enemy.TakeDamage(damage, type == collisionType.head ? true : false);
+                Destroy(other);
             }
             if (other.tag == "FireArrow")
             {
                 enemy.BurnEffect();
                 enemy.TakeDamage(damage, type == collisionType.head ? true : false);
+                Destroy(other);
             }
             if (other.tag == "NormalArrow")
             {
                 enemy.TakeDamage(damage, type == collisionType.head ? true : false);
+                Destroy(other);
+                
             }
+
 
     }
 }

@@ -27,7 +27,7 @@ public class Crosshair : MonoBehaviour
         }
         else
         {
-            currentSize = Mathf.Lerp(currentSize, restingSize, Time.deltaTime * speed);
+            currentSize = Mathf.Lerp(currentSize, restingSize, Time.deltaTime * speed * 2);
         }
 
         crosshair.sizeDelta = new Vector2(currentSize, currentSize);
