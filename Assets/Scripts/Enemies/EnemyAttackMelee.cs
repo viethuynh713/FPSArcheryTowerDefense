@@ -17,9 +17,11 @@ public class EnemyAttackMelee : EnemyAttack
     }
     public override void CheckDistance()
     {
-        Debug.Log("CheckDistance");
+        
         if (Vector3.Distance(transform.position, GetComponent<EnemyMovement>().targetWp.position) <= distanceToTarget && canAtk == false && isAttacking == false)
         {
+            Debug.Log("Close enough to atk");
+
             canAtk = true;
             
             agent.isStopped = true;
@@ -28,6 +30,7 @@ public class EnemyAttackMelee : EnemyAttack
         }
         if(Vector3.Distance(transform.position, GetComponent<EnemyMovement>().targetWp.position) > distanceToTarget)
         {
+            Debug.Log("Go to Base");
             agent.isStopped = false;
         }
         
@@ -44,7 +47,7 @@ public class EnemyAttackMelee : EnemyAttack
         {
             if (nearyby.gameObject.tag == "Castle")
             {
-        Debug.Log("Chem");
+                Debug.Log("Chem");
                 GameManager.instance.CastleTakeDamage(enemyAttackDmg);
             }
         }
