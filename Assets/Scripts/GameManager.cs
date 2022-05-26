@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +18,21 @@ public class GameManager : MonoBehaviour
     public GameObject completeLevelUI;
     public Slider healthBarOfCastle;
 
+    [Header("Ice Arrows")]
+    public int IceQuantity = 0;
+    public TMP_Text IceQuantityText;
+    public float IceRateSlow = 5f;
+    public TMP_Text IceRateSlowText;
+    public float IceTimeSlowDuration = 1;
+    public TMP_Text IceTimeSlowDurationText;
+
+    [Header("Fire Arrows")]
+    public int FireQuantity = 0;
+    public TMP_Text FireQuantityText;
+    public float FireTimeBurnDuration = 1;
+    public TMP_Text FireTimeBurnDurationText;
+    public float FireDamBurn = 5f;
+    public TMP_Text FireDamBurnText;
     public SceneFader sceneFader;
     private BowScript bs;
     private Look look;
@@ -28,6 +44,14 @@ public class GameManager : MonoBehaviour
         healthBarOfCastle.minValue = 0;
         healthBarOfCastle.value = castleHealth;
 
+        // Ice Arrows
+        IceQuantityText.text = IceQuantity.ToString();
+        IceRateSlowText.text = IceRateSlow.ToString() + "%";
+        IceTimeSlowDurationText.text = IceTimeSlowDuration.ToString() + "s";
+        // Fire Arrows
+        FireQuantityText.text = FireQuantity.ToString();
+        FireTimeBurnDurationText.text = FireTimeBurnDuration.ToString() + "s";
+        FireDamBurnText.text = FireDamBurn.ToString();
         isGameOver = false;
         isWin = false;
         bs = FindObjectOfType<BowScript>();
@@ -103,4 +127,60 @@ public class GameManager : MonoBehaviour
             EndGame();
         }
     }
+    public void BuyIceArrow()
+    {
+        if (money >= 50)
+        {
+            money -= 50;
+            IceQuantity++;
+            IceQuantityText.text = IceQuantity.ToString();
+        }
+    }
+    public void BuyFireArrow()
+    {
+        if (money >= 50)
+        {
+            money -= 100;
+            FireQuantity++;
+            FireQuantityText.text = FireQuantity.ToString();
+        }
+    }
+    public void IncreaseIceRateSlow()
+    {
+        if (money >= 100 && IceRateSlow < 100)
+        {
+            money -= 100;
+            IceRateSlow += 1;
+            IceRateSlowText.text = IceRateSlow.ToString() + "%";
+        }
+
+    }
+    public void IncreaseIceTimeSlowDuration()
+    {
+        if (money >= 100)
+        {
+            money -= 100;
+            IceTimeSlowDuration += 1;
+            IceTimeSlowDurationText.text = IceTimeSlowDuration.ToString() + "s";
+        }
+    }
+    public void IncreaseFireTimeBurnDuration()
+    {
+        if (money >= 100)
+        {
+            money -= 100;
+            FireTimeBurnDuration += 1;
+            FireTimeBurnDurationText.text = FireTimeBurnDuration.ToString() + "s";
+        }
+    }
+    public void IncreaseFireDamBurn()
+    {
+        if (money >= 100)
+        {
+            money -= 100;
+            FireDamBurn += 5;
+            FireDamBurnText.text = FireDamBurn.ToString();
+        }
+    }
+
 }
