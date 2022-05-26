@@ -10,6 +10,7 @@ public class PauseMenu : MonoBehaviour
     public string menuSceneName = "MainMenu";
 
     public GameObject UI;
+    public GameObject ShopUI;
 
     public SceneFader sceneFader;
 
@@ -54,7 +55,12 @@ public class PauseMenu : MonoBehaviour
     }*/
 
     
-
+    public void ShopButton(){
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        ShopUI.SetActive(true);
+        UI.SetActive(false);
+    }
     public void RetryButton()
     {
 
