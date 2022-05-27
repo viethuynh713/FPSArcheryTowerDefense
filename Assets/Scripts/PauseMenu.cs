@@ -80,6 +80,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
         Cursor.visible = true;
         ShopUI.SetActive(true);
+        cursorLocked = false;
         UI.SetActive(false);
         bs.isTimeStopped = isShopOpen;
     }
@@ -193,6 +194,7 @@ public class PauseMenu : MonoBehaviour
 
     public void CloseShop()
     {
+        cursorLocked = true;
         isShopOpen = false;
         ShopUI.SetActive(false);
         UI.SetActive(true);
