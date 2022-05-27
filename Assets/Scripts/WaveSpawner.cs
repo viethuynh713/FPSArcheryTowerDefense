@@ -70,9 +70,6 @@ public class WaveSpawner : MonoBehaviour
 
             }
         }
-
-
-
         waveIndex++;
         yield return null;
 
