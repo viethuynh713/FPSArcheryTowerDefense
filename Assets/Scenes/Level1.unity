@@ -4746,7 +4746,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 836597990}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43493df68189a304aa1e19c8cf146a3d, type: 3}
   m_Name: 
@@ -4994,7 +4994,6 @@ MonoBehaviour:
   fireArrowObjWhileHolding: {fileID: 1688885442}
   normalArrowObject: {fileID: 8960625873756202457, guid: 62f87a9e383edf0418cddde9a10234a8, type: 3}
   normalArrowObjWhileHolding: {fileID: 1339603061}
-  ps: {fileID: 0}
   isTimeStopped: 0
   isUsingBomp: 0
   isShopOpen: 0
@@ -6608,6 +6607,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1837222113}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: CloseShop
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -10945,6 +10956,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1837222112}
+  - component: {fileID: 1837222114}
+  - component: {fileID: 1837222113}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -10968,6 +10981,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1837222113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837222111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de6a81ed4fca4b94eab5424f52f55154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorLocked: 1
+  isShopOpen: 0
+  isGameOver: 0
+  menuSceneName: MainMenu
+  UI: {fileID: 977455442}
+  ShopUI: {fileID: 2099108659}
+  sceneFader: {fileID: 3370687969966657989}
+  sceneFaderGO: {fileID: 3370687969966657988}
+  bs: {fileID: 0}
+--- !u!114 &1837222114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837222111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43493df68189a304aa1e19c8cf146a3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waves:
+  - waveOfLevel: 1
+    spawnEnemy:
+    - quantityOfEnemy: 1
+      enemy: {fileID: 8440857819620202354, guid: 9775d67a33e911845a0e153764a0f04a, type: 3}
+  spawnPoint:
+  - {fileID: 1212481330}
+  - {fileID: 555008289}
+  - {fileID: 1202301763}
+  - {fileID: 1865801863}
+  timeBetweenWaves: 5
+  waveCountdownText: {fileID: 1398514775}
 --- !u!1 &1865801862
 GameObject:
   m_ObjectHideFlags: 0
