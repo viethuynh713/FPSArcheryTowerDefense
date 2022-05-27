@@ -24,8 +24,8 @@ public class RoundsSurvived : MonoBehaviour
         while(round < GameManager.instance.level)
         {
             round++;
-            Debug.Log(round);
-            roundsText.text = round.ToString();
+            // Debug.Log(round);
+            roundsText.text = GameManager.instance.level.ToString();
 
             yield return new WaitForSeconds(0.05f);
         }
