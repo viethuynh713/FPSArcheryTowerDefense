@@ -3983,6 +3983,7 @@ GameObject:
   - component: {fileID: 708126645}
   - component: {fileID: 708126647}
   - component: {fileID: 708126646}
+  - component: {fileID: 708126648}
   m_Layer: 5
   m_Name: Round
   m_TagString: Untagged
@@ -4052,6 +4053,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 708126644}
   m_CullTransparentMesh: 1
+--- !u!114 &708126648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708126644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49d982eb21459784ebbd61b10d2b26cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roundsText: {fileID: 1985922477}
 --- !u!1 &715065615
 GameObject:
   m_ObjectHideFlags: 0
@@ -4747,11 +4761,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - waveOfLevel: 4
+  - waveOfLevel: 2
     spawnEnemy:
-    - quantityOfEnemy: 2
+    - quantityOfEnemy: 1
       enemy: {fileID: 8440857819620202354, guid: 9775d67a33e911845a0e153764a0f04a, type: 3}
-    - quantityOfEnemy: 2
+    - quantityOfEnemy: 1
+      enemy: {fileID: 8440857819620202354, guid: 7bb703fa1a4c1f747b9dcf7c69802ebc, type: 3}
+  - waveOfLevel: 1
+    spawnEnemy:
+    - quantityOfEnemy: 1
+      enemy: {fileID: 8440857819620202354, guid: 9775d67a33e911845a0e153764a0f04a, type: 3}
+    - quantityOfEnemy: 1
+      enemy: {fileID: 8440857819620202354, guid: 7bb703fa1a4c1f747b9dcf7c69802ebc, type: 3}
+  - waveOfLevel: 1
+    spawnEnemy:
+    - quantityOfEnemy: 1
+      enemy: {fileID: 8440857819620202354, guid: 9775d67a33e911845a0e153764a0f04a, type: 3}
+    - quantityOfEnemy: 1
+      enemy: {fileID: 8440857819620202354, guid: 7bb703fa1a4c1f747b9dcf7c69802ebc, type: 3}
+  - waveOfLevel: 1
+    spawnEnemy:
+    - quantityOfEnemy: 1
+      enemy: {fileID: 8440857819620202354, guid: 9775d67a33e911845a0e153764a0f04a, type: 3}
+    - quantityOfEnemy: 1
       enemy: {fileID: 8440857819620202354, guid: 7bb703fa1a4c1f747b9dcf7c69802ebc, type: 3}
   spawnPoint:
   - {fileID: 1212481330}

@@ -14,9 +14,10 @@ public class GameOver : MonoBehaviour
 
     public string menuSceneName = "MainMenu";
 
-    private void OnEnable()
+    void OnEnable()
     {
         roundText.text = GameManager.instance.level.ToString();
+        
     }
 
     public void Retry()

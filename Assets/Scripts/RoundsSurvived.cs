@@ -17,13 +17,15 @@ public class RoundsSurvived : MonoBehaviour
     {
         roundsText.text = "0";
         int round = 0;
+        
 
         yield return new WaitForSeconds(0.7f);
 
         while(round < GameManager.instance.level)
         {
             round++;
-            roundsText.text = round.ToString();
+            Debug.Log(round);
+            roundsText.text = (1 + round).ToString();
 
             yield return new WaitForSeconds(0.05f);
         }
