@@ -7,6 +7,10 @@ public class PauseMenu : MonoBehaviour
 {
     public bool cursorLocked = true;
 
+    public bool isShopOpen = false;
+
+    public bool isGameOver = false;
+
     public string menuSceneName = "MainMenu";
 
     public GameObject UI;
@@ -21,7 +25,7 @@ public class PauseMenu : MonoBehaviour
 
     private Motion mt;
 
-    private void Start()
+    public void Start()
     {
         bs = FindObjectOfType<BowScript>();
 
@@ -33,8 +37,19 @@ public class PauseMenu : MonoBehaviour
 
     }
 
-    void Update()
+    public void Update()
     {
+        if (isGameOver)
+            return;
+
+        if (isShopOpen)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                CloseShop();
+            }
+            return;
+        }
         //UpdateCusorLock();
         UpdateCusorLock2();
 
@@ -56,6 +71,7 @@ public class PauseMenu : MonoBehaviour
 
     
     public void ShopButton(){
+        isShopOpen = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         ShopUI.SetActive(true);
@@ -108,7 +124,7 @@ public class PauseMenu : MonoBehaviour
 
     public void UpdateCusorLock2()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !GameManager.instance.isGameOver)
         {
             if (cursorLocked)
             {
@@ -167,5 +183,12 @@ public class PauseMenu : MonoBehaviour
                 }
             }
         }*/
+    }
+
+    public void CloseShop()
+    {
+        isShopOpen = false;
+        ShopUI.SetActive(false);
+        UI.SetActive(true);
     }
 }
