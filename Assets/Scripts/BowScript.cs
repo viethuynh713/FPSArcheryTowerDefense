@@ -29,6 +29,7 @@ public class BowScript : MonoBehaviour
 
     public bool isTimeStopped;
     public bool isUsingBomp;
+    public bool isShopOpen;
 
     public Animator animator;
     public Camera fpsCam;
@@ -42,16 +43,20 @@ public class BowScript : MonoBehaviour
 
         Animator animator = gameObject.GetComponent<Animator>();
 
+        ps = GetComponent<PauseMenu>();
+
         isUsingBomp = false;
 
     }
 
-    void Update()
+    public void Update()
     {
         if (isTimeStopped)
         {
             return;
         }
+
+        //isTimeStopped = ps.isShopOpen;
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {

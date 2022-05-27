@@ -4753,12 +4753,6 @@ MonoBehaviour:
       enemy: {fileID: 8440857819620202354, guid: 9775d67a33e911845a0e153764a0f04a, type: 3}
     - quantityOfEnemy: 2
       enemy: {fileID: 8440857819620202354, guid: 7bb703fa1a4c1f747b9dcf7c69802ebc, type: 3}
-  - waveOfLevel: 6
-    spawnEnemy:
-    - quantityOfEnemy: 4
-      enemy: {fileID: 8440857819620202354, guid: 9775d67a33e911845a0e153764a0f04a, type: 3}
-    - quantityOfEnemy: 2
-      enemy: {fileID: 8440857819620202354, guid: 7bb703fa1a4c1f747b9dcf7c69802ebc, type: 3}
   spawnPoint:
   - {fileID: 1212481330}
   - {fileID: 555008289}
@@ -4812,6 +4806,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorLocked: 0
+  isShopOpen: 0
+  isGameOver: 0
   menuSceneName: MainMenu
   UI: {fileID: 977455442}
   ShopUI: {fileID: 2099108659}
@@ -4901,6 +4897,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 72.65161
       objectReference: {fileID: 0}
+    - target: {fileID: -3775611984580146414, guid: 5db7fa20ff13c4a4e8e739e9e74b99c9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e5998e79593c25c44b4d25d71ab2d771, type: 2}
     - target: {fileID: -2198888584636164399, guid: 5db7fa20ff13c4a4e8e739e9e74b99c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -90
@@ -4994,6 +4994,7 @@ MonoBehaviour:
   ps: {fileID: 0}
   isTimeStopped: 0
   isUsingBomp: 0
+  isShopOpen: 0
   animator: {fileID: 855507562}
   fpsCam: {fileID: 1806403337}
 --- !u!95 &855507562
@@ -5349,7 +5350,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 949813500}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -6539,10 +6540,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2099108659}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 836597995}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: CloseShop
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6550,18 +6551,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 977455442}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1194876989
 MonoBehaviour:
@@ -9050,7 +9039,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1550041574}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

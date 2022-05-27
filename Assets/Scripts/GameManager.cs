@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     public SceneFader sceneFader;
     private BowScript bs;
     private Look look;
+    private PauseMenu pm;
 
 
     private void Awake() 
@@ -74,10 +75,6 @@ public class GameManager : MonoBehaviour
         {
             EndGame();
         }
-
-        
-
-        
     }
 
     public void EndGame()
