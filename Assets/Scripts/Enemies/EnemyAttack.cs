@@ -10,6 +10,7 @@ public class EnemyAttack : MonoBehaviour
     public Animator anim;
     public GameObject attackPos;
     public NavMeshAgent agent;
+    
 
     public float timeBetweenAtk = 1.5f;
     public float atkCountdown;
@@ -23,11 +24,17 @@ public class EnemyAttack : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         isAttacking = false;
         anim = GetComponent<Animator>();
+        
 
     }
 
     public void Update()
     {
+        if (GameManager.instance.isGameOver)
+        {
+            return;
+        }
+
         if (canAtk == false && atkCountdown > 0 && isAttacking == true)
         {
             atkCountdown -= Time.deltaTime;
