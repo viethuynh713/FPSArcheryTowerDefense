@@ -872,9 +872,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 98243182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3b4c43ca59676c4eb691b9bcfc40402, type: 3}
+  m_Script: {fileID: 11500000, guid: d40bbf3798c52ed409d61bc4b572abe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBarOfCastle: {fileID: 320375349}
 --- !u!1 &136373203
 GameObject:
   m_ObjectHideFlags: 0
@@ -2899,7 +2900,7 @@ GameObject:
   - component: {fileID: 444184560}
   m_Layer: 5
   m_Name: GameOverUI
-  m_TagString: Untagged
+  m_TagString: GameOverUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4753,12 +4754,6 @@ MonoBehaviour:
       enemy: {fileID: 8440857819620202354, guid: 9775d67a33e911845a0e153764a0f04a, type: 3}
     - quantityOfEnemy: 2
       enemy: {fileID: 8440857819620202354, guid: 7bb703fa1a4c1f747b9dcf7c69802ebc, type: 3}
-  - waveOfLevel: 6
-    spawnEnemy:
-    - quantityOfEnemy: 4
-      enemy: {fileID: 8440857819620202354, guid: 9775d67a33e911845a0e153764a0f04a, type: 3}
-    - quantityOfEnemy: 2
-      enemy: {fileID: 8440857819620202354, guid: 7bb703fa1a4c1f747b9dcf7c69802ebc, type: 3}
   spawnPoint:
   - {fileID: 1212481330}
   - {fileID: 555008289}
@@ -4785,7 +4780,6 @@ MonoBehaviour:
   castleHealth: 1000
   gameOverUI: {fileID: 444184558}
   completeLevelUI: {fileID: 1445889140}
-  healthBarOfCastle: {fileID: 320375349}
   IceQuantity: 0
   IceQuantityText: {fileID: 1772450409}
   IceRateSlow: 5
@@ -4798,7 +4792,6 @@ MonoBehaviour:
   FireTimeBurnDurationText: {fileID: 999561456}
   FireDamBurn: 5
   FireDamBurnText: {fileID: 538703170}
-  sceneFader: {fileID: 3370687969966657989}
 --- !u!114 &836597995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4901,6 +4894,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 72.65161
       objectReference: {fileID: 0}
+    - target: {fileID: -3775611984580146414, guid: 5db7fa20ff13c4a4e8e739e9e74b99c9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e5998e79593c25c44b4d25d71ab2d771, type: 2}
     - target: {fileID: -2198888584636164399, guid: 5db7fa20ff13c4a4e8e739e9e74b99c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -90
@@ -5044,6 +5041,7 @@ GameObject:
   - component: {fileID: 879985325}
   - component: {fileID: 879985324}
   - component: {fileID: 879985323}
+  - component: {fileID: 879985327}
   m_Layer: 5
   m_Name: MenuGameCanvas
   m_TagString: Untagged
@@ -5136,6 +5134,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &879985327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879985322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa59d717586b38043b7147a7a68ffe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &888376323
 GameObject:
   m_ObjectHideFlags: 0
@@ -7442,6 +7452,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1445889140}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1359689231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7819,7 +7841,7 @@ GameObject:
   - component: {fileID: 1445889145}
   m_Layer: 5
   m_Name: GameCompleteUI
-  m_TagString: Untagged
+  m_TagString: GameCompleteUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
