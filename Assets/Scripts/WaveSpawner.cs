@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class WaveSpawner : MonoBehaviour
 {
     public static int EnemiesAlive = 0;
-    public GameObject[] enemyPrefab;
-    public int[] quantityOfEnemy;
+    // public GameObject[] enemyPrefab;
+    // public int[] quantityOfEnemy;
+    public Waves[] waves;
 
     public Transform[] spawnPoint;
 
@@ -35,7 +36,7 @@ public class WaveSpawner : MonoBehaviour
             return;
         }
 
-        if (waveIndex == quantityOfEnemy.Length)
+        if (waveIndex == waves.Length)
         {
             GameManager.instance.WinLevel();
             this.enabled = false;
@@ -53,24 +54,27 @@ public class WaveSpawner : MonoBehaviour
 
         countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
 
-        waveCountdownText.text = (waveIndex + 1).ToString() + " / " + quantityOfEnemy.Length.ToString();
+        waveCountdownText.text = (waveIndex + 1).ToString() + " / " + waves.Length.ToString();
     }
 
     IEnumerator SpawnWave()
     {
-        // GameManager.instance.level++;
 
-        EnemiesAlive = quantityOfEnemy[waveIndex];
-
-        for (int i = 0; i < EnemiesAlive; i++)
+        EnemiesAlive = waves[waveIndex].waveOfLevel;
+        for (int i = 0; i < waves[waveIndex].spawnEnemy.Length; i++)
         {
-            float random = Random.Range(0f, 10f);
+            for (int j = 0; j < waves[waveIndex].spawnEnemy[i].quantityOfEnemy; j++)
+            {
+                SpawnEnemy(waves[waveIndex].spawnEnemy[i].enemy);
+                yield return new WaitForSeconds(1f);
 
-            SpawnEnemy(enemyPrefab[random > 7 ? 0 : 1]);
-            yield return new WaitForSeconds(1f);
+            }
         }
 
+
+
         waveIndex++;
+        yield return null;
 
     }
     private int oldPosIndex;
@@ -81,7 +85,7 @@ public class WaveSpawner : MonoBehaviour
         {
             index = Random.Range(0, spawnPoint.Length);
         }
-        while(index == oldPosIndex);
+        while (index == oldPosIndex);
         oldPosIndex = index;
         Instantiate(enemy, spawnPoint[index].position, spawnPoint[index].rotation);
     }

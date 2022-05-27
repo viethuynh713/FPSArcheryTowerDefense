@@ -7,6 +7,10 @@ public class Waves
 {
 	
 	public int waveOfLevel;
-	public int[] quantityOfEnemy;
+	// public int[] quantityOfEnemy;
+	public SpawnEnemy[] spawnEnemy;// số lượng/loại/
+	// public int quantityOfEnemyRange;
+	// public int quantityOfEnemyMelee;
+	
 
 }
