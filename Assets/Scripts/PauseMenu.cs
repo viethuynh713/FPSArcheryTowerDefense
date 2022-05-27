@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+   
+
     public bool cursorLocked = true;
 
     public bool isShopOpen = false;
@@ -24,6 +26,8 @@ public class PauseMenu : MonoBehaviour
     public BowScript bs;
 
     private Motion mt;
+
+    
 
     public void Start()
     {
@@ -73,13 +77,15 @@ public class PauseMenu : MonoBehaviour
     public void ShopButton(){
         isShopOpen = true;
         Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0f;
         Cursor.visible = true;
         ShopUI.SetActive(true);
         UI.SetActive(false);
+        bs.isTimeStopped = isShopOpen;
     }
+
     public void RetryButton()
     {
-
         UI.SetActive(false);
         //sceneFaderGO.SetActive(true);
         Time.timeScale = 1f;
