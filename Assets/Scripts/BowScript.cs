@@ -24,8 +24,8 @@ public class BowScript : MonoBehaviour
     private ArrowType currentArrowType;
 
 
-    [HideInInspector]
-    public PauseMenu ps;
+    //[HideInInspector]
+    //public PauseMenu ps;
 
     public bool isTimeStopped;
     public bool isUsingBomp;
@@ -34,16 +34,13 @@ public class BowScript : MonoBehaviour
     public Animator animator;
     public Camera fpsCam;
 
-
-    void Start()
+    public void Start()
     {
         currentArrowType = ArrowType.Normal;
 
-        ps = FindObjectOfType<PauseMenu>();
+        
 
         Animator animator = gameObject.GetComponent<Animator>();
-
-        ps = GetComponent<PauseMenu>();
 
         isUsingBomp = false;
 
@@ -51,7 +48,7 @@ public class BowScript : MonoBehaviour
 
     public void Update()
     {
-        if (GameManager.instance.isGameOver)
+        if (GameManager.instance.isGameOver || isTimeStopped)
         {
             return;
         }
