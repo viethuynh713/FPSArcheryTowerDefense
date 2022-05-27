@@ -53,6 +53,10 @@ public class BowScript : MonoBehaviour
             return;
         }
 
+        
+
+     
+
         //isTimeStopped = ps.isShopOpen;
 
         if (Input.GetKeyDown(KeyCode.Mouse1))

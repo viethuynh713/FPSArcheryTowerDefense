@@ -5,13 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-   
-
     public bool cursorLocked = true;
 
     public bool isShopOpen = false;
 
     public bool isGameOver = false;
+
+    public bool isPressContinue;
 
     public string menuSceneName = "MainMenu";
 
@@ -58,21 +58,6 @@ public class PauseMenu : MonoBehaviour
         UpdateCusorLock2();
 
     }
-
-    /*public void Toggle()
-    {
-        
-
-        if (UI.activeSelf)
-        {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1f;
-        }
-    }*/
-
     
     public void ShopButton(){
         isShopOpen = true;
@@ -115,17 +100,21 @@ public class PauseMenu : MonoBehaviour
 
     public void Continue()
     {
-        UI.SetActive(false);
+        isPressContinue = true;
 
-        Time.timeScale = 1f;
+        UI.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;
 
-        Cursor.visible = true;
+        Cursor.visible = false;
 
         cursorLocked = false;
 
+        Time.timeScale = 1f;
+
         bs.isTimeStopped = cursorLocked;
+
+
 
     }
 
@@ -141,7 +130,7 @@ public class PauseMenu : MonoBehaviour
 
                 Cursor.lockState = CursorLockMode.Locked;
 
-                Cursor.visible = true;
+                Cursor.visible = false;
 
                 cursorLocked = false;
 
@@ -155,7 +144,7 @@ public class PauseMenu : MonoBehaviour
 
                 Cursor.lockState = CursorLockMode.None;
 
-                Cursor.visible = false;
+                Cursor.visible = true;
 
                 cursorLocked = true;
 
