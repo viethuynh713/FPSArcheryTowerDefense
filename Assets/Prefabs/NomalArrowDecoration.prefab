@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6386535936614325941}
   m_Layer: 0
   m_Name: NomalArrowDecoration
-  m_TagString: Untagged
+  m_TagString: NormalArrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

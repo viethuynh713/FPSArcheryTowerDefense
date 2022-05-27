@@ -27,7 +27,7 @@ using UnityEngine;
         // Update is called once per frame
         void Update()
         {
-        if (isTimeStopped)
+        if (GameManager.instance.isGameOver)
             return;
 
             SetY();

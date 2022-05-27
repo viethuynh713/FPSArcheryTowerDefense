@@ -51,7 +51,7 @@ public class BowScript : MonoBehaviour
 
     public void Update()
     {
-        if (isTimeStopped)
+        if (GameManager.instance.isGameOver)
         {
             return;
         }

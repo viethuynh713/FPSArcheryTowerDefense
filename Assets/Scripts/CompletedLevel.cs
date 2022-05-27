@@ -8,13 +8,18 @@ public class CompletedLevel : MonoBehaviour
 
     public SceneFader sceneFader;
 
-    public string nextLevel = "Level2";
+    public string nextLevel;// = "Level"+(GameManager.instance.level+1).ToString();
     public int levelToUnlock = 2;
+    private void Start() {
+        nextLevel = "Level"+(GameManager.instance.level+1).ToString();
+    }
 
     public void Continue()
     {
         PlayerPrefs.SetInt("levelReached", levelToUnlock);
+        Time.timeScale = 1f;
         sceneFader.FadeTo(nextLevel);
+
     }
 
     public void Menu()
