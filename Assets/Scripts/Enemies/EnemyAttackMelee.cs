@@ -30,7 +30,7 @@ public class EnemyAttackMelee : EnemyAttack
         }
         if(Vector3.Distance(transform.position, GetComponent<EnemyMovement>().targetWp.position) > distanceToTarget)
         {
-            Debug.Log("Go to Base");
+            // Debug.Log("Go to Base");
             agent.isStopped = false;
         }
         

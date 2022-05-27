@@ -47,6 +47,7 @@ public class BompArrowScript : MonoBehaviour
             GameObject _exp = Instantiate(exp, transform.position, transform.rotation);
             Knockback();
             Destroy(gameObject);
+            Destroy(_exp, 3);
         }
     }
 }

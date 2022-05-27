@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class WaveSpawner : MonoBehaviour
 {
     public static int EnemiesAlive = 0;
+    public GameObject[] enemyPrefab;
+    public int[] quantityOfEnemy;
 
-    public Waves[] waves;
-
-    public Transform spawnPoint;
+    public Transform[] spawnPoint;
 
     public float timeBetweenWaves = 5f;
     private float countdown = 5f;
@@ -19,7 +19,9 @@ public class WaveSpawner : MonoBehaviour
 
     void Start()
     {
+
         EnemiesAlive = 0;
+        oldPosIndex = 0;
     }
 
     // Update is called once per frame
@@ -33,13 +35,13 @@ public class WaveSpawner : MonoBehaviour
             return;
         }
 
-        if (waveIndex == waves.Length)
-        { 
+        if (waveIndex == quantityOfEnemy.Length)
+        {
             GameManager.instance.WinLevel();
             this.enabled = false;
         }
 
-        if ( countdown <= 0f)
+        if (countdown <= 0f)
         {
             StartCoroutine(SpawnWave());
             countdown = timeBetweenWaves;
@@ -50,31 +52,38 @@ public class WaveSpawner : MonoBehaviour
         countdown -= Time.deltaTime;
 
         countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
-        
-        waveCountdownText.text = (waveIndex + 1).ToString() + " / " + waves.Length.ToString();
+
+        waveCountdownText.text = (waveIndex + 1).ToString() + " / " + quantityOfEnemy.Length.ToString();
     }
 
     IEnumerator SpawnWave()
     {
-        GameManager.instance.level++;
+        // GameManager.instance.level++;
 
-        Waves wave = waves[waveIndex];
+        EnemiesAlive = quantityOfEnemy[waveIndex];
 
-        EnemiesAlive = wave.count;
-
-        for (int i = 0;i < wave.count; i++)
+        for (int i = 0; i < EnemiesAlive; i++)
         {
-            SpawnEnemy(wave.enemy);
-            yield return new WaitForSeconds( 1f / wave.rate);
+            float random = Random.Range(0f, 10f);
+
+            SpawnEnemy(enemyPrefab[random > 7 ? 0 : 1]);
+            yield return new WaitForSeconds(1f);
         }
-        
+
         waveIndex++;
 
     }
-
+    private int oldPosIndex;
     void SpawnEnemy(GameObject enemy)
     {
-        Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
+        int index;
+        do
+        {
+            index = Random.Range(0, spawnPoint.Length);
+        }
+        while(index == oldPosIndex);
+        oldPosIndex = index;
+        Instantiate(enemy, spawnPoint[index].position, spawnPoint[index].rotation);
     }
 
 }

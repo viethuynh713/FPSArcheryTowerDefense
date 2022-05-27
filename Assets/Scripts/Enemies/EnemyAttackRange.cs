@@ -39,6 +39,8 @@ public class EnemyAttackRange : EnemyAttack
         GameObject eBullet = Instantiate(enemyBullet,attackPos.transform.position, Quaternion.identity);
 
         eBullet.GetComponent<Rigidbody>().AddForce(-attackPos.transform.position * bulletForce, ForceMode.Impulse);
+
+        Destroy(eBullet, 3);
     
     }
 }

@@ -25,6 +25,7 @@ public class TakeDame : MonoBehaviour
                 enemy.BurnEffect();
                 enemy.TakeDamage(damage, type == collisionType.head ? true : false);
                 Destroy(other);
+                Destroy(_exp, 3);
             }
             if (other.tag == "NormalArrow")
             {

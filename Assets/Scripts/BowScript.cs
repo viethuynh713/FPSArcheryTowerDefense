@@ -178,7 +178,7 @@ public class BowScript : MonoBehaviour
                         arrow.transform.forward = direction.normalized;
                         arrow.GetComponent<Rigidbody>().AddForce(direction.normalized * _charge, ForceMode.Impulse);
                         _charge = 0;
-                        Debug.Log(arrow);
+                        // Debug.Log(arrow);
 
                         Destroy(arrow, 2f);
                     }
