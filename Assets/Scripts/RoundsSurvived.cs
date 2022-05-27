@@ -25,7 +25,7 @@ public class RoundsSurvived : MonoBehaviour
         {
             round++;
             Debug.Log(round);
-            roundsText.text = (1 + round).ToString();
+            roundsText.text = round.ToString();
 
             yield return new WaitForSeconds(0.05f);
         }

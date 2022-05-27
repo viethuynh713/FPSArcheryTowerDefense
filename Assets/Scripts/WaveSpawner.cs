@@ -53,8 +53,12 @@ public class WaveSpawner : MonoBehaviour
         countdown -= Time.deltaTime;
 
         countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
-
-        waveCountdownText.text = (waveIndex + 1).ToString() + " / " + waves.Length.ToString();
+        if (waveIndex == waves.Length)
+        {
+            waveCountdownText.text = waveIndex.ToString() + " / " + waves.Length.ToString();
+        }
+        else
+            waveCountdownText.text = (waveIndex + 1).ToString() + " / " + waves.Length.ToString();
     }
 
     IEnumerator SpawnWave()
@@ -70,12 +74,15 @@ public class WaveSpawner : MonoBehaviour
             }
             
         }
+        if(waveIndex < waves.Length)
+            waveIndex++;
 
-        GameManager.instance.level++;       
+        if (GameManager.instance.level < waveIndex)
+        {
+            GameManager.instance.level++;
+        }
+
         
-        waveIndex++;
-
-        yield return null;
 
     }
     private int oldPosIndex;
