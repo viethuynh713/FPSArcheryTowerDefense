@@ -12,6 +12,7 @@ TagManager:
   - NormalArrow
   - GameOverUI
   - GameCompleteUI
+  - Bow
   layers:
   - Default
   - TransparentFX

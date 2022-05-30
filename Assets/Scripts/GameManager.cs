@@ -161,7 +161,7 @@ public class GameManager : MonoBehaviour
         {
             money -= 100;
             IceTimeSlowDuration += 1;
-            // IceTimeSlowDurationText.text = IceTimeSlowDuration.ToString() + "s";
+            IceTimeSlowDurationText.text = IceTimeSlowDuration.ToString() + "s";
         }
     }
     public void IncreaseFireTimeBurnDuration()
@@ -170,7 +170,7 @@ public class GameManager : MonoBehaviour
         {
             money -= 100;
             FireTimeBurnDuration += 1;
-            // FireTimeBurnDurationText.text = FireTimeBurnDuration.ToString() + "s";
+            FireTimeBurnDurationText.text = FireTimeBurnDuration.ToString() + "s";
         }
     }
     public void IncreaseFireDamBurn()
@@ -179,7 +179,7 @@ public class GameManager : MonoBehaviour
         {
             money -= 100;
             FireDamBurn += 5;
-            // FireDamBurnText.text = FireDamBurn.ToString();
+            FireDamBurnText.text = FireDamBurn.ToString();
         }
     }
 

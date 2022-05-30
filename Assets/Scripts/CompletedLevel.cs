@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CompletedLevel : MonoBehaviour
 {
@@ -8,17 +9,22 @@ public class CompletedLevel : MonoBehaviour
 
     public SceneFader sceneFader;
 
-    public string nextLevel;// = "Level"+(GameManager.instance.level+1).ToString();
-    public int levelToUnlock = 2;
+    private string nextLevel;// = "Level"+(GameManager.instance.level+1).ToString();
+    // public int levelToUnlock = 2;
     private void Start() {
-        nextLevel = "Level"+(GameManager.instance.level+1).ToString();
+        nextLevel = "Level"+(SceneManager.GetActiveScene().buildIndex+1).ToString();
     }
 
     public void Continue()
     {
-        PlayerPrefs.SetInt("levelReached", levelToUnlock);
+        // PlayerPrefs.SetInt("levelReached", levelToUnlock);
         Time.timeScale = 1f;
+        GameManager.instance.level = 0;
+        GameManager.instance.isGameOver = false;
+        GameManager.instance.isWin = false;
         sceneFader.FadeTo(nextLevel);
+        // Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.visible = false;
 
     }
 

@@ -53,5 +53,6 @@ public class SceneFader : MonoBehaviour
         }
 
         SceneManager.LoadScene(scene);
+        sceneFaderGO.SetActive(false);
     }
 }

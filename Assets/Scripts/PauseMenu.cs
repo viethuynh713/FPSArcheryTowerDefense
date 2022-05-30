@@ -5,13 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+   
     public bool cursorLocked = true;
 
     public bool isShopOpen = false;
 
     public bool isGameOver = false;
-
-    public bool isPressContinue;
 
     public string menuSceneName = "MainMenu";
 
@@ -20,10 +19,10 @@ public class PauseMenu : MonoBehaviour
 
     public SceneFader sceneFader;
 
-    public GameObject sceneFaderGO;
+    // public GameObject sceneFaderGO;
 
     [HideInInspector]
-    public BowScript bs;
+    // public BowScript bs;
 
     private Motion mt;
 
@@ -31,11 +30,11 @@ public class PauseMenu : MonoBehaviour
 
     public void Start()
     {
-        bs = FindObjectOfType<BowScript>();
+        // bs = GameObject.FindGameObjectWithTag("Bow").GetComponent<BowScript>();
+        // Debug.Log(bs);
+        // Cursor.lockState = CursorLockMode.Locked;
 
-        Cursor.lockState = CursorLockMode.Locked;
-
-        Cursor.visible = false;
+        // Cursor.visible = false;
 
         sceneFader = FindObjectOfType<SceneFader>();
 
@@ -43,6 +42,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Update()
     {
+        // Debug.Log("isShopOpen");
         if (isGameOver)
             return;
 
@@ -58,6 +58,21 @@ public class PauseMenu : MonoBehaviour
         UpdateCusorLock2();
 
     }
+
+    /*public void Toggle()
+    {
+        
+
+        if (UI.activeSelf)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+    }*/
+
     
     public void ShopButton(){
         isShopOpen = true;
@@ -65,9 +80,8 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
         Cursor.visible = true;
         ShopUI.SetActive(true);
-        cursorLocked = false;
         UI.SetActive(false);
-        bs.isTimeStopped = isShopOpen;
+        GameObject.FindGameObjectWithTag("Bow").GetComponent<BowScript>().isTimeStopped = isShopOpen;
     }
 
     public void RetryButton()
@@ -100,26 +114,23 @@ public class PauseMenu : MonoBehaviour
 
     public void Continue()
     {
-        isPressContinue = true;
-
         UI.SetActive(false);
-
-        Cursor.lockState = CursorLockMode.Locked;
-
-        Cursor.visible = false;
-
-        cursorLocked = false;
 
         Time.timeScale = 1f;
 
-        bs.isTimeStopped = cursorLocked;
+        Cursor.lockState = CursorLockMode.Locked;
 
+        Cursor.visible = true;
 
+        cursorLocked = false;
+
+        GameObject.FindGameObjectWithTag("Bow").GetComponent<BowScript>().isTimeStopped = cursorLocked;
 
     }
 
     public void UpdateCusorLock2()
     {
+            // Debug.Log("Escape");
         if (Input.GetKeyDown(KeyCode.Escape) && !GameManager.instance.isGameOver)
         {
             if (cursorLocked)
@@ -130,11 +141,11 @@ public class PauseMenu : MonoBehaviour
 
                 Cursor.lockState = CursorLockMode.Locked;
 
-                Cursor.visible = false;
+                Cursor.visible = true;
 
                 cursorLocked = false;
 
-                bs.isTimeStopped = cursorLocked;
+                GameObject.FindGameObjectWithTag("Bow").GetComponent<BowScript>().isTimeStopped = cursorLocked;
             }
             else
             {
@@ -144,11 +155,11 @@ public class PauseMenu : MonoBehaviour
 
                 Cursor.lockState = CursorLockMode.None;
 
-                Cursor.visible = true;
+                Cursor.visible = false;
 
                 cursorLocked = true;
 
-                bs.isTimeStopped = cursorLocked;
+                GameObject.FindGameObjectWithTag("Bow").GetComponent<BowScript>().isTimeStopped = cursorLocked;
             }
         }
 
@@ -183,7 +194,6 @@ public class PauseMenu : MonoBehaviour
 
     public void CloseShop()
     {
-        cursorLocked = true;
         isShopOpen = false;
         ShopUI.SetActive(false);
         UI.SetActive(true);

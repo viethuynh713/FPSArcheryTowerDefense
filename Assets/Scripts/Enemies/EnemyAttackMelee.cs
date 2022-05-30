@@ -47,7 +47,7 @@ public class EnemyAttackMelee : EnemyAttack
         {
             if (nearyby.gameObject.tag == "Castle")
             {
-                Debug.Log("Chem");
+                // Debug.Log("Chem");
                 GameManager.instance.CastleTakeDamage(enemyAttackDmg);
             }
         }

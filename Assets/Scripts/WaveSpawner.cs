@@ -23,6 +23,8 @@ public class WaveSpawner : MonoBehaviour
 
         EnemiesAlive = 0;
         oldPosIndex = 0;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -72,17 +74,17 @@ public class WaveSpawner : MonoBehaviour
                 SpawnEnemy(waves[waveIndex].spawnEnemy[i].enemy);
                 yield return new WaitForSeconds(1f);
             }
-            
+
         }
-        if(waveIndex < waves.Length)
+        if (waveIndex < waves.Length)
             waveIndex++;
 
-        if (GameManager.instance.level < waveIndex)
-        {
-            GameManager.instance.level++;
-        }
+            if (GameManager.instance.level < waveIndex)
+            {
+                GameManager.instance.level++;
+            }
 
-        
+
 
     }
     private int oldPosIndex;
