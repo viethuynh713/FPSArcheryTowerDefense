@@ -3839,10 +3839,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - waveOfLevel: 1
+  - waveOfLevel: 4
     spawnEnemy:
-    - quantityOfEnemy: 1
+    - quantityOfEnemy: 2
       enemy: {fileID: 8440857819620202354, guid: 9775d67a33e911845a0e153764a0f04a, type: 3}
+    - quantityOfEnemy: 2
+      enemy: {fileID: 8440857819620202354, guid: 7bb703fa1a4c1f747b9dcf7c69802ebc, type: 3}
+  - waveOfLevel: 6
+    spawnEnemy:
+    - quantityOfEnemy: 2
+      enemy: {fileID: 8440857819620202354, guid: 9775d67a33e911845a0e153764a0f04a, type: 3}
+    - quantityOfEnemy: 4
+      enemy: {fileID: 8440857819620202354, guid: 7bb703fa1a4c1f747b9dcf7c69802ebc, type: 3}
+  - waveOfLevel: 8
+    spawnEnemy:
+    - quantityOfEnemy: 4
+      enemy: {fileID: 8440857819620202354, guid: 9775d67a33e911845a0e153764a0f04a, type: 3}
+    - quantityOfEnemy: 4
+      enemy: {fileID: 8440857819620202354, guid: 7bb703fa1a4c1f747b9dcf7c69802ebc, type: 3}
+  - waveOfLevel: 8
+    spawnEnemy:
+    - quantityOfEnemy: 8
+      enemy: {fileID: 8440857819620202354, guid: 9775d67a33e911845a0e153764a0f04a, type: 3}
+  - waveOfLevel: 8
+    spawnEnemy:
+    - quantityOfEnemy: 8
+      enemy: {fileID: 8440857819620202354, guid: 7bb703fa1a4c1f747b9dcf7c69802ebc, type: 3}
   spawnPoint:
   - {fileID: 1212481330}
   - {fileID: 555008289}

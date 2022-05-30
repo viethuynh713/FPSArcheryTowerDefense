@@ -79,10 +79,10 @@ public class WaveSpawner : MonoBehaviour
         if (waveIndex < waves.Length)
             waveIndex++;
 
-        if (GameManager.instance.level < waveIndex)
-        {
-            GameManager.instance.level++;
-        }
+            if (GameManager.instance.level < waveIndex)
+            {
+                GameManager.instance.level++;
+            }
 
 
 
