@@ -28,6 +28,7 @@ public class EnemyAttackMelee : EnemyAttack
 
             agent.velocity = Vector3.zero;
         }
+
         if(Vector3.Distance(transform.position, GetComponent<EnemyMovement>().targetWp.position) > distanceToTarget)
         {
             // Debug.Log("Go to Base");

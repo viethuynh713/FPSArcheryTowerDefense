@@ -23,6 +23,15 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: a9033d6b220d3844f941e0c20796bff5
+  - enabled: 1
+    path: Assets/Scenes/Lobby.unity
+    guid: 0ab6e8f49fb0caf4a96f4e5c3e68c2ba
+  - enabled: 1
+    path: Assets/Scenes/MultiplayerLevel.unity
+    guid: df37e76df9e50ac43a214f4c36b41422
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000

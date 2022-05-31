@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
     public class Motion : MonoBehaviour
     {
@@ -27,35 +28,42 @@ using UnityEngine;
         private float sprintFOVModifier = 1.5f;
         bool isGrouded;
 
+        PhotonView view;
+
+
 
         private void Start()
         {
             isGrouded = true;
             baseFOV = normalCam.fieldOfView;
-            Camera.main.enabled = false; //Turn off main camera
+            //Camera.main.enabled = false; //Turn off main camera
             rig = GetComponent<Rigidbody>(); //Get component RigiBody (for Moving Player)
+            view = GetComponent<PhotonView>();
         }
 
         private void Update()
         {
-            //Input Axis
-            float horiMove = Input.GetAxisRaw("Horizontal");
-            float vertMove = Input.GetAxisRaw("Vertical");
-
-            //Controls
-            bool sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
-            bool jump = Input.GetKeyDown(KeyCode.Space);
-
-            bool isGrouded = Physics.Raycast(groundDetector.position, Vector3.down,0.1f, ground);
-            //isGrouded = Physics.CheckSphere(groundDetector.position, groundDistance, ground);
-            bool isJumping = jump && isGrouded;
-            bool isSprinting = sprint && vertMove > 0 && !isJumping  && isGrouded;//
-
-            //Jumping
-            if (isJumping)
+            //if (view.IsMine)
             {
-                rig.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-            }
+                //Input Axis
+                float horiMove = Input.GetAxisRaw("Horizontal");
+                float vertMove = Input.GetAxisRaw("Vertical");
+
+                //Controls
+                bool sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+                bool jump = Input.GetKeyDown(KeyCode.Space);
+
+                bool isGrouded = Physics.Raycast(groundDetector.position, Vector3.down, 0.1f, ground);
+                //isGrouded = Physics.CheckSphere(groundDetector.position, groundDistance, ground);
+                bool isJumping = jump && isGrouded;
+                bool isSprinting = sprint && vertMove > 0 && !isJumping && isGrouded;//
+
+                //Jumping
+                if (isJumping)
+                {
+                    rig.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+                }
+            }      
         }
 
         // Update is called once per frame

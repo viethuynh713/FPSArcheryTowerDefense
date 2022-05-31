@@ -3839,12 +3839,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - waveOfLevel: 4
+  - waveOfLevel: 6
     spawnEnemy:
     - quantityOfEnemy: 2
-      enemy: {fileID: 8440857819620202354, guid: 9775d67a33e911845a0e153764a0f04a, type: 3}
+      enemy: {fileID: 9217589545309291490, guid: 1d8d84a8f83922240b04691cbbc0b8e7, type: 3}
     - quantityOfEnemy: 2
-      enemy: {fileID: 8440857819620202354, guid: 7bb703fa1a4c1f747b9dcf7c69802ebc, type: 3}
+      enemy: {fileID: 8837366698217251413, guid: e19690ebd022a69429309459e7da3146, type: 3}
+    - quantityOfEnemy: 2
+      enemy: {fileID: 6463576300260778641, guid: 6fd3a0400f1de7e419b4bb8b87a82d24, type: 3}
   - waveOfLevel: 6
     spawnEnemy:
     - quantityOfEnemy: 2
