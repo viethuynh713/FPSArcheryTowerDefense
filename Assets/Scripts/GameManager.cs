@@ -90,6 +90,11 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void RestoreCastleHP()
+    {
+        castleHealth = 1000f;
+    }
+
     public void WinLevel()
     {
         isGameOver = true;
@@ -103,9 +108,6 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
 
         completeLevelUI.SetActive(true);
-        
-
-
         
     }
     public void CastleTakeDamage(float damage)

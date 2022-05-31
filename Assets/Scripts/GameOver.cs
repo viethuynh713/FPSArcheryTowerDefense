@@ -17,7 +17,6 @@ public class GameOver : MonoBehaviour
     void OnEnable()
     {
         roundText.text = GameManager.instance.level.ToString();
-        
     }
 
     public void Retry()
@@ -31,6 +30,12 @@ public class GameOver : MonoBehaviour
         Cursor.visible = false;
 
         sceneFader.FadeTo(SceneManager.GetActiveScene().name);
+
+
+        GameManager.instance.castleHealth = 1000f;
+
+        GameManager.instance.isGameOver = false;
+
     }
 
     public void Menu()
@@ -44,5 +49,9 @@ public class GameOver : MonoBehaviour
         Cursor.visible = true;
 
         sceneFader.FadeTo(menuSceneName);
+
+        GameManager.instance.RestoreCastleHP();
+
+
     }
 }

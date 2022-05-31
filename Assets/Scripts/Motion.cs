@@ -30,9 +30,7 @@ using Photon.Pun;
 
         PhotonView view;
 
-
-
-        private void Start()
+        public void Start()
         {
             isGrouded = true;
             baseFOV = normalCam.fieldOfView;
@@ -41,36 +39,45 @@ using Photon.Pun;
             view = GetComponent<PhotonView>();
         }
 
-        private void Update()
+        public void Update()
         {
-            //if (view.IsMine)
-            {
-                //Input Axis
-                float horiMove = Input.GetAxisRaw("Horizontal");
-                float vertMove = Input.GetAxisRaw("Vertical");
-
-                //Controls
-                bool sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
-                bool jump = Input.GetKeyDown(KeyCode.Space);
-
-                bool isGrouded = Physics.Raycast(groundDetector.position, Vector3.down, 0.1f, ground);
-                //isGrouded = Physics.CheckSphere(groundDetector.position, groundDistance, ground);
-                bool isJumping = jump && isGrouded;
-                bool isSprinting = sprint && vertMove > 0 && !isJumping && isGrouded;//
-
-                //Jumping
-                if (isJumping)
-                {
-                    rig.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-                }
-            }      
+        //if (view.IsMine)
+        if (GameManager.instance.isGameOver)
+        {
+            return;
         }
+
+        //Input Axis
+        float horiMove = Input.GetAxisRaw("Horizontal");
+        float vertMove = Input.GetAxisRaw("Vertical");
+
+        //Controls
+        bool sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+        bool jump = Input.GetKeyDown(KeyCode.Space);
+
+        bool isGrouded = Physics.Raycast(groundDetector.position, Vector3.down, 0.1f, ground);
+        //isGrouded = Physics.CheckSphere(groundDetector.position, groundDistance, ground);
+        bool isJumping = jump && isGrouded;
+        bool isSprinting = sprint && vertMove > 0 && !isJumping && isGrouded;//
+
+        //Jumping
+        if (isJumping)
+        {
+            rig.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        }
+
+    }
 
         // Update is called once per frame
         void FixedUpdate()
         {
-            //Input Axis
-            float horiMove = Input.GetAxisRaw("Horizontal");  
+        if (GameManager.instance.isGameOver)
+        {
+            return;
+        }
+
+        //Input Axis
+        float horiMove = Input.GetAxisRaw("Horizontal");  
             float vertMove = Input.GetAxisRaw("Vertical");
 
             //Controls

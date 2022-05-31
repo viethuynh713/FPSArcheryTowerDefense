@@ -576,7 +576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 842c9726340142d44a886dac96285240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyAttackDmg: 10
+  enemyAttackDmg: 100
   radius: 3
   anim: {fileID: 0}
   attackPos: {fileID: 331726144462392245}

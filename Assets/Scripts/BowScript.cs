@@ -10,6 +10,9 @@ public class BowScript : MonoBehaviour
     public float chargeMax;
     public float chargeRate;
 
+    public float atkCountdown = .5f;
+    public float currentAtkCountdown;
+
     public KeyCode fireButton;
 
     public Transform spawn;
@@ -38,8 +41,6 @@ public class BowScript : MonoBehaviour
     {
         currentArrowType = ArrowType.Normal;
 
-        
-
         Animator animator = gameObject.GetComponent<Animator>();
 
         isUsingBomp = false;
@@ -52,11 +53,6 @@ public class BowScript : MonoBehaviour
         {
             return;
         }
-
-        
-
-     
-
         //isTimeStopped = ps.isShopOpen;
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
@@ -83,6 +79,7 @@ public class BowScript : MonoBehaviour
             }
         }
 
+        currentAtkCountdown -= Time.deltaTime;
 
         Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         RaycastHit hit;
@@ -105,6 +102,11 @@ public class BowScript : MonoBehaviour
         {
             case ArrowType.Fire:
 
+                if (currentAtkCountdown > 0)
+                {
+                    return;
+                }
+
                 if (Input.GetKey(fireButton) && _charge < chargeMax)
                 {
 
@@ -126,6 +128,7 @@ public class BowScript : MonoBehaviour
                     arrow.transform.forward = direction.normalized;
                     arrow.GetComponent<Rigidbody>().AddForce(direction.normalized * _charge, ForceMode.Impulse);
                     _charge = 0;
+                    currentAtkCountdown = atkCountdown;
                     Destroy(arrow, 2f);
 
                 }
@@ -134,6 +137,11 @@ public class BowScript : MonoBehaviour
 
             case ArrowType.Ice:
                 {
+                    if (currentAtkCountdown > 0)
+                    {
+                        return;
+                    }
+
                     if (Input.GetKey(fireButton) && _charge < chargeMax)
                     {
 
@@ -156,7 +164,7 @@ public class BowScript : MonoBehaviour
                         arrow.transform.forward = direction.normalized;
                         arrow.GetComponent<Rigidbody>().AddForce(direction.normalized * _charge, ForceMode.Impulse);
                         _charge = 0;
-
+                        currentAtkCountdown = atkCountdown;
                         Destroy(arrow, 2f);
                     }
 
@@ -164,6 +172,11 @@ public class BowScript : MonoBehaviour
                 }
             case ArrowType.Normal:
                 {
+                    if (currentAtkCountdown > 0)
+                    {
+                        return;
+                    }
+
                     if (Input.GetKey(fireButton) && _charge < chargeMax)
                     {
 
@@ -185,7 +198,7 @@ public class BowScript : MonoBehaviour
                         arrow.GetComponent<Rigidbody>().AddForce(direction.normalized * _charge, ForceMode.Impulse);
                         _charge = 0;
                         // Debug.Log(arrow);
-
+                        currentAtkCountdown = atkCountdown;
                         Destroy(arrow, 2f);
                     }
 
