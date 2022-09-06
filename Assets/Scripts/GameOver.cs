@@ -1,57 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
+//using UnityEngine.SceneManagement;
+//using UnityEngine.UI;
 
-public class GameOver : MonoBehaviour
-{
-    public Text roundText;
+//public class GameOver : MonoBehaviour
+//{
+//    public Text roundText;
 
-    public SceneFader sceneFader;
+//    public SceneFader sceneFader;
 
-    public GameObject GOUI;
+//    public GameObject GOUI;
 
-    public string menuSceneName = "MainMenu";
+//    public string menuSceneName = "MainMenu";
 
-    void OnEnable()
-    {
-        roundText.text = GameManager.instance.level.ToString();
-    }
+//    public void Retry()
+//    {
+//        GOUI.SetActive(false);
 
-    public void Retry()
-    {
-        GOUI.SetActive(false);
+//        Time.timeScale = 1f;
 
-        Time.timeScale = 1f;
+//        Cursor.lockState = CursorLockMode.Locked;
 
-        Cursor.lockState = CursorLockMode.Locked;
+//        Cursor.visible = false;
 
-        Cursor.visible = false;
-
-        sceneFader.FadeTo(SceneManager.GetActiveScene().name);
+//        sceneFader.FadeTo(SceneManager.GetActiveScene().name);
 
 
-        GameManager.instance.castleHealth = 1000f;
+//        GameManager.instance.castleHealth = 1000f;
 
-        GameManager.instance.isGameOver = false;
+//        GameManager.instance.isGameOver = false;
 
-    }
+//    }
 
-    public void Menu()
-    {
-        GOUI.SetActive(false);
+//    public void Menu()
+//    {
+//        GOUI.SetActive(false);
 
-        Time.timeScale = 1f;
+//        Time.timeScale = 1f;
 
-        Cursor.lockState = CursorLockMode.None;
+//        Cursor.lockState = CursorLockMode.None;
 
-        Cursor.visible = true;
+//        Cursor.visible = true;
 
-        sceneFader.FadeTo(menuSceneName);
+//        sceneFader.FadeTo(menuSceneName);
 
-        GameManager.instance.RestoreCastleHP();
+//        GameManager.instance.RestoreCastleHP();
 
 
-    }
-}
+//    }
+//}

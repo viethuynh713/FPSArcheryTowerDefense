@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class IcedArrow : MonoBehaviour
 {
+    private Rigidbody rb;
+
+    private bool targetHit;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     void OnTriggerEnter(Collider collider)
     {
@@ -13,7 +21,12 @@ public class IcedArrow : MonoBehaviour
             ExplosionBarrel EB = collider.GetComponent<ExplosionBarrel>();
             EB.Explosion();
         }
+
+        
+        
+
     }
 
+    
 
 }

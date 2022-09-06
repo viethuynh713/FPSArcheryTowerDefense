@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/LoginLogout/LoginRegisterScene.unity
+    guid: 2a5a3b6984a9c9245ae0ed0df7b5f04d
+  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 3dd2269e519054d4aa721f99055a1126
   - enabled: 1
@@ -16,29 +19,11 @@ EditorBuildSettings:
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/Level2.unity
-    guid: 0b34983627e8f7c41b5653778fc4a8be
+    guid: 454035ffcf2b0034188fba3f16d94d17
   - enabled: 1
     path: Assets/Scenes/Level3.unity
-    guid: 7a3040c64e949f541bebcee210ea3131
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+    guid: 74b23847567b502408eb4c4178810613
   - enabled: 1
-    path: Assets/Scenes/Loading.unity
-    guid: a9033d6b220d3844f941e0c20796bff5
-  - enabled: 1
-    path: Assets/Scenes/Lobby.unity
-    guid: 0ab6e8f49fb0caf4a96f4e5c3e68c2ba
-  - enabled: 1
-    path: Assets/Scenes/MultiplayerLevel.unity
-    guid: df37e76df9e50ac43a214f4c36b41422
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+    path: Assets/Scenes/LevelTutorial.unity
+    guid: d68cf77686713be479a63cfbc23fc68e
   m_configObjects: {}

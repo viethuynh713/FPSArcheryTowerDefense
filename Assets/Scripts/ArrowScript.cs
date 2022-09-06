@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class ArrowScript : MonoBehaviour
 {
     void OnTriggerEnter(Collider collider)
@@ -13,6 +14,4 @@ public class ArrowScript : MonoBehaviour
         }
 
     }
-
-
 }

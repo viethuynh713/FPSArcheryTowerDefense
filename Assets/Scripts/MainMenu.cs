@@ -6,25 +6,28 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public string levelToLoad = "Level1";
-    public string loadToMultiplayer = "Loading";
 
     public SceneFader sceneFader;
 
     public void Play()
     {
         sceneFader.FadeTo(levelToLoad);
-    }
-
-    public void MultiplayPlay()
-    {
-        sceneFader.FadeTo(loadToMultiplayer);
+        Time.timeScale = 1f;
     }
 
     public void Quit()
     {
-
-        Debug.Log("Exiting ...");
         Application.Quit();
 
+    }
+
+    public void EnablePauseMenu()
+    {
+        PauseMenu.instance.enabled = true;
+    }
+
+    public void DisablePauseMenu()
+    {
+        PauseMenu.instance.enabled = false;
     }
 }

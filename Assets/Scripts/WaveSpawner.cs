@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour
 {
+    public static WaveSpawner instance;
+
     public static int EnemiesAlive = 0;
-    // public GameObject[] enemyPrefab;
-    // public int[] quantityOfEnemy;
     public Waves[] waves;
 
     public Transform[] spawnPoint;
@@ -18,6 +18,16 @@ public class WaveSpawner : MonoBehaviour
     public Text waveCountdownText;
     private int waveIndex = 0;
 
+    public string nextLevel;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            instance = this;
+        }
+    }
+
     void Start()
     {
 
@@ -25,6 +35,8 @@ public class WaveSpawner : MonoBehaviour
         oldPosIndex = 0;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        GameManager.instance.nextLevel = nextLevel;
     }
 
     // Update is called once per frame
@@ -41,7 +53,7 @@ public class WaveSpawner : MonoBehaviour
         if (waveIndex == waves.Length)
         {
             GameManager.instance.WinLevel();
-            this.enabled = false;
+            enabled = false;
         }
 
         if (countdown <= 0f)
@@ -50,7 +62,6 @@ public class WaveSpawner : MonoBehaviour
             countdown = timeBetweenWaves;
             return;
         }
-
 
         countdown -= Time.deltaTime;
 
@@ -65,8 +76,7 @@ public class WaveSpawner : MonoBehaviour
 
     IEnumerator SpawnWave()
     {
-
-        EnemiesAlive = waves[waveIndex].waveOfLevel;
+        EnemiesAlive = waves[waveIndex].enemyPerWave;
         for (int i = 0; i < waves[waveIndex].spawnEnemy.Length; i++)
         {
             for (int j = 0; j < waves[waveIndex].spawnEnemy[i].quantityOfEnemy; j++)
@@ -79,23 +89,31 @@ public class WaveSpawner : MonoBehaviour
         if (waveIndex < waves.Length)
             waveIndex++;
 
-            if (GameManager.instance.level < waveIndex)
-            {
-                GameManager.instance.level++;
-            }
-
-
+        if (GameManager.instance.level < waveIndex)
+        {
+            GameManager.instance.level++;
+        }
 
     }
+
     private int oldPosIndex;
+
     void SpawnEnemy(GameObject enemy)
     {
         int index;
-        do
+        if(spawnPoint.Length != 1)
         {
-            index = Random.Range(0, spawnPoint.Length);
+            do
+            {
+                index = Random.Range(0, spawnPoint.Length);
+            }
+            while (index == oldPosIndex);
         }
-        while (index == oldPosIndex);
+        else
+        {
+            index = 0;
+        }
+        
         oldPosIndex = index;
         Instantiate(enemy, spawnPoint[index].position, spawnPoint[index].rotation);
     }

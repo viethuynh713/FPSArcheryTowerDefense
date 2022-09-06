@@ -3,15 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    #region Game/Shop Manager
+
     public static GameManager instance;
     public bool isGameOver;
     public bool isWin;
     public int level;
+    public int maxLevelReach;
     public int money = 0;
     public float castleHealth = 1000f;
+
+    [SerializeField] float playerHealth;
+    public GameObject playerGO;
+    [SerializeField] float respawnTime;
 
     // [Header("UI Objects")]
     public GameObject gameOverUI;
@@ -34,6 +42,8 @@ public class GameManager : MonoBehaviour
     public float FireDamBurn = 5f;
     public TMP_Text FireDamBurnText;
 
+    public Camera mainCamera;
+
     private void Awake() 
     {
         level = 1;
@@ -41,6 +51,18 @@ public class GameManager : MonoBehaviour
         // healthBarOfCastle.minValue = 0;
         // healthBarOfCastle.value = castleHealth;
 
+        ShopUIRefresh();
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+        DontDestroyOnLoad(instance);
+        
+    }
+
+    public void ShopUIRefresh()
+    {
         // Ice Arrows
         IceQuantityText.text = IceQuantity.ToString();
         IceRateSlowText.text = IceRateSlow.ToString() + "%";
@@ -51,13 +73,6 @@ public class GameManager : MonoBehaviour
         FireDamBurnText.text = FireDamBurn.ToString();
         isGameOver = false;
         isWin = false;
-
-        if (instance == null)
-        {
-            instance = this;
-        }
-        DontDestroyOnLoad(instance);
-        
     }
 
     public void Update()
@@ -71,7 +86,36 @@ public class GameManager : MonoBehaviour
         {
             EndGame();
         }
+
+        if(playerHealth <= 0)
+        {
+            PlayerDie();
+        }
+    }
+
+    public void PlayerTakeDamage(float damage)
+    {
+        playerHealth -= damage;
+        // healthBarOfCastle.value = castleHealth;
+        if (playerHealth <= 0)
+        {
+            PlayerDie();
+        }
+    }
+
+    public void PlayerDie()
+    {
+        playerGO.SetActive(false);
         
+        StartCoroutine(RespawnPlayer());
+        
+    }
+
+    IEnumerator RespawnPlayer()
+    {
+        yield return new WaitForSeconds(respawnTime);
+        mainCamera.gameObject.SetActive(false);
+        playerGO.SetActive(true);
     }
 
     public void EndGame()
@@ -94,6 +138,11 @@ public class GameManager : MonoBehaviour
     {
         castleHealth = 1000f;
     }
+    
+    public void RestorePlayerHP()
+    {
+        playerHealth = 1000f;
+    }
 
     public void WinLevel()
     {
@@ -107,9 +156,14 @@ public class GameManager : MonoBehaviour
 
         Cursor.visible = true;
 
-        completeLevelUI.SetActive(true);
-        
+        //if (nextLevel == null)
+        //    nextLevel = LevelHolder.instance.nextLevel;
+        //else
+        //    nextLevel = LevelHolder.instance.nextLevel;
+
+        completeLevelUI.SetActive(true); 
     }
+
     public void CastleTakeDamage(float damage)
     {
         castleHealth -= damage;
@@ -119,6 +173,7 @@ public class GameManager : MonoBehaviour
             EndGame();
         }
     }
+
     public void BuyIceArrow()
     {
         if (money >= 50)
@@ -128,25 +183,29 @@ public class GameManager : MonoBehaviour
             IceQuantityText.text = IceQuantity.ToString();
         }
     }
+
     public void DecsIceArrow()
     {
             IceQuantity--;
             IceQuantityText.text = IceQuantity.ToString();
     }
+
     public void DecsFireArrow()
     {
         FireQuantity--;
         FireQuantityText.text = FireQuantity.ToString();
     }
+
     public void BuyFireArrow()
     {
         if (money >= 50)
         {
-            money -= 100;
+            money -= 50;
             FireQuantity++;
             FireQuantityText.text = FireQuantity.ToString();
         }
     }
+
     public void IncreaseIceRateSlow()
     {
         if (money >= 100 && IceRateSlow < 100)
@@ -155,8 +214,8 @@ public class GameManager : MonoBehaviour
             IceRateSlow += 1;
             IceRateSlowText.text = IceRateSlow.ToString() + "%";
         }
-
     }
+
     public void IncreaseIceTimeSlowDuration()
     {
         if (money >= 100)
@@ -166,6 +225,7 @@ public class GameManager : MonoBehaviour
             IceTimeSlowDurationText.text = IceTimeSlowDuration.ToString() + "s";
         }
     }
+
     public void IncreaseFireTimeBurnDuration()
     {
         if (money >= 100)
@@ -175,6 +235,7 @@ public class GameManager : MonoBehaviour
             FireTimeBurnDurationText.text = FireTimeBurnDuration.ToString() + "s";
         }
     }
+
     public void IncreaseFireDamBurn()
     {
         if (money >= 100)
@@ -184,5 +245,70 @@ public class GameManager : MonoBehaviour
             FireDamBurnText.text = FireDamBurn.ToString();
         }
     }
+
+    #endregion
+
+    #region Complete Level
+
+    [Header("CompleteLevel")]
+    
+    public string menuSceneName = "MainMenu";
+
+    public SceneFader sceneFader;
+
+    public string nextLevel;
+
+    public void Continue()
+    {
+        
+        Time.timeScale = 1f;
+        level = 0;
+        isGameOver = false;
+        isWin = false;
+        sceneFader.FadeTo(nextLevel);
+        LoginPagePlayFab.instance.SendPlayerData();
+    }
+
+    
+
+    public void Menu()
+    {
+        level = 0;
+        isGameOver = false;
+        isWin = false;
+        completeLevelUI.SetActive(false);
+        sceneFader.FadeTo(menuSceneName);
+    }
+
+    #endregion
+
+    #region Game Over
+
+    [Header("GameOver")]
+
+    public Text roundText;
+
+    public GameObject GOUI;
+
+    public void Retry()
+    {
+        GOUI.SetActive(false);
+
+        Time.timeScale = 1f;
+
+        Cursor.lockState = CursorLockMode.Locked;
+
+        Cursor.visible = false;
+
+        sceneFader.FadeTo(SceneManager.GetActiveScene().name);
+
+
+        castleHealth = 1000f;
+
+        isGameOver = false;
+
+    }
+
+    #endregion
 
 }

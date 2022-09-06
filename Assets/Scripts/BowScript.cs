@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class BowScript : MonoBehaviour
 {
+    public static BowScript instance;
+
     public enum ArrowType { Ice, Fire, Normal };
     float _charge;
 
@@ -26,6 +29,8 @@ public class BowScript : MonoBehaviour
 
     private ArrowType currentArrowType;
 
+   
+
 
     //[HideInInspector]
     //public PauseMenu ps;
@@ -36,6 +41,18 @@ public class BowScript : MonoBehaviour
 
     public Animator animator;
     public Camera fpsCam;
+
+    private void Awake()
+    {
+        if(instance != null && instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
 
     public void Start()
     {
@@ -193,13 +210,21 @@ public class BowScript : MonoBehaviour
 
                         animator.Play("BowRelease");
                         normalArrowObjWhileHolding.SetActive(false);
+
+                        //GameObject arrow = ObjectPool.SharedInstance.GetPooledObject();
                         GameObject arrow = Instantiate(normalArrowObject, spawn.position, Quaternion.identity);
-                        arrow.transform.forward = direction.normalized;
-                        arrow.GetComponent<Rigidbody>().AddForce(direction.normalized * _charge, ForceMode.Impulse);
+                        if (arrow != null)
+                        {
+                            arrow.transform.forward = direction.normalized;
+                            arrow.GetComponent<Rigidbody>().AddForce(direction.normalized * _charge, ForceMode.Impulse);
+                        }
+
+                        
+                       
                         _charge = 0;
                         // Debug.Log(arrow);
                         currentAtkCountdown = atkCountdown;
-                        Destroy(arrow, 2f);
+                        
                     }
 
                     break;

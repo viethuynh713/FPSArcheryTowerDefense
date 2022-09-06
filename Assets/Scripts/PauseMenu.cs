@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    public static PauseMenu instance;
    
-    public bool cursorLocked = true;
+    [SerializeField] private bool cursorLocked;
 
-    public bool isShopOpen = false;
+    [SerializeField] private bool isShopOpen = false;
 
     public bool isGameOver = false;
 
@@ -26,23 +27,32 @@ public class PauseMenu : MonoBehaviour
 
     private Motion mt;
 
-    
+    private void Awake()
+    {
+        if(instance != null && instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
 
     public void Start()
     {
-        // bs = GameObject.FindGameObjectWithTag("Bow").GetComponent<BowScript>();
-        // Debug.Log(bs);
-        // Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
+        cursorLocked = true;
 
-        // Cursor.visible = false;
+        Cursor.visible = false;
 
-        sceneFader = FindObjectOfType<SceneFader>();
-
+        //sceneFader = FindObjectOfType<SceneFader>();
     }
+
+
 
     public void Update()
     {
-        // Debug.Log("isShopOpen");
         if (isGameOver)
             return;
 
@@ -54,8 +64,7 @@ public class PauseMenu : MonoBehaviour
             }
             return;
         }
-        //UpdateCusorLock();
-        UpdateCusorLock2();
+        UpdateCusorLock();
 
     }
 
@@ -72,16 +81,23 @@ public class PauseMenu : MonoBehaviour
             Time.timeScale = 1f;
         }
     }*/
-
     
     public void ShopButton(){
+        GameManager.instance.ShopUIRefresh();
+
         isShopOpen = true;
+
         Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0f;
+
         Cursor.visible = true;
+
         ShopUI.SetActive(true);
+
         UI.SetActive(false);
-        GameObject.FindGameObjectWithTag("Bow").GetComponent<BowScript>().isTimeStopped = isShopOpen;
+
+        //BowScript.instance.enabled = false;
+        //GameObject.FindGameObjectWithTag("Bow").GetComponent<BowScript>().isTimeStopped = isShopOpen;
     }
 
     public void RetryButton()
@@ -112,6 +128,33 @@ public class PauseMenu : MonoBehaviour
 
     }
 
+
+    public void UpdateCusorLock()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && !GameManager.instance.isGameOver)
+        {
+            if(cursorLocked)
+            {
+                UI.SetActive(true);
+
+                Time.timeScale = 0f;
+
+                Cursor.lockState = CursorLockMode.None;
+
+                Cursor.visible = true;
+
+                cursorLocked = !cursorLocked;
+
+                BowScript.instance.enabled = false;
+
+                //GameObject.FindGameObjectWithTag("Bow").GetComponent<BowScript>().isTimeStopped = cursorLocked;
+
+            }
+            else
+                Continue();          
+        }            
+    }
+
     public void Continue()
     {
         UI.SetActive(false);
@@ -120,78 +163,16 @@ public class PauseMenu : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
 
-        Cursor.visible = true;
+        Cursor.visible = false;
 
-        cursorLocked = false;
+        cursorLocked = !cursorLocked;
 
-        GameObject.FindGameObjectWithTag("Bow").GetComponent<BowScript>().isTimeStopped = cursorLocked;
+        BowScript.instance.enabled = true;
 
+        Debug.Log(BowScript.instance.enabled);
+
+        //GameObject.FindGameObjectWithTag("Bow").GetComponent<BowScript>().isTimeStopped = cursorLocked;
     }
-
-    public void UpdateCusorLock2()
-    {
-            // Debug.Log("Escape");
-        if (Input.GetKeyDown(KeyCode.Escape) && !GameManager.instance.isGameOver)
-        {
-            if (cursorLocked)
-            {
-                UI.SetActive(false);
-
-                Time.timeScale = 1f;
-
-                Cursor.lockState = CursorLockMode.Locked;
-
-                Cursor.visible = true;
-
-                cursorLocked = false;
-
-                GameObject.FindGameObjectWithTag("Bow").GetComponent<BowScript>().isTimeStopped = cursorLocked;
-            }
-            else
-            {
-                UI.SetActive(true);
-
-                Time.timeScale = 0f;
-
-                Cursor.lockState = CursorLockMode.None;
-
-                Cursor.visible = false;
-
-                cursorLocked = true;
-
-                GameObject.FindGameObjectWithTag("Bow").GetComponent<BowScript>().isTimeStopped = cursorLocked;
-            }
-        }
-
-        /*public void UpdateCusorLock()
-        {
-            if (cursorLocked)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-
-                Cursor.visible = false;
-
-                if (Input.GetKeyDown(KeyCode.Escape))
-                {
-                    Toggle();
-                    cursorLocked = false;
-                }
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.None;
-
-                Cursor.visible = true;
-
-                if (Input.GetKeyDown(KeyCode.Escape))
-                {
-                    Toggle();
-                    cursorLocked = true;
-                }
-            }
-        }*/
-    }
-
     public void CloseShop()
     {
         isShopOpen = false;

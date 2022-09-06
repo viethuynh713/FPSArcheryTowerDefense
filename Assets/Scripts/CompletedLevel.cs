@@ -1,35 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
+//using UnityEngine.SceneManagement;
 
-public class CompletedLevel : MonoBehaviour
-{
-    public string menuSceneName = "MainMenu";
+//public class CompletedLevel : MonoBehaviour
+//{
+//    public static CompletedLevel instance;
 
-    public SceneFader sceneFader;
+//    public string menuSceneName = "MainMenu";
 
-    private string nextLevel;// = "Level"+(GameManager.instance.level+1).ToString();
-    // public int levelToUnlock = 2;
-    private void Start() {
-        nextLevel = "Level"+(SceneManager.GetActiveScene().buildIndex+1).ToString();
-    }
+//    public SceneFader sceneFader;
 
-    public void Continue()
-    {
-        // PlayerPrefs.SetInt("levelReached", levelToUnlock);
-        Time.timeScale = 1f;
-        GameManager.instance.level = 0;
-        GameManager.instance.isGameOver = false;
-        GameManager.instance.isWin = false;
-        sceneFader.FadeTo(nextLevel);
-        // Cursor.lockState = CursorLockMode.Locked;
-        // Cursor.visible = false;
+//    public string nextLevel;
 
-    }
+//    private void Awake()
+//    {
+//        if (instance != null)
+//            instance = this;
+//    }
 
-    public void Menu()
-    {
-        sceneFader.FadeTo(menuSceneName);
-    }
-}
+//    public void Continue()
+//    {
+//        // PlayerPrefs.SetInt("levelReached", levelToUnlock);
+//        Time.timeScale = 1f;
+//        nextLevel = LevelHolder.instance.nextLevel;
+//        Debug.Log("Next Level:" + nextLevel);
+//        GameManager.instance.level = 0;
+//        GameManager.instance.isGameOver = false;
+//        GameManager.instance.isWin = false;
+//        sceneFader.FadeTo(nextLevel);
+//        // Cursor.lockState = CursorLockMode.Locked;
+//        // Cursor.visible = false;
+
+//    }
+
+//    public void Menu()
+//    {
+//        sceneFader.FadeTo(menuSceneName);
+//    }
+//}

@@ -373,8 +373,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.9253798
-  m_Center: {x: -0.05360222, y: 0.17975718, z: -0.19679123}
+  m_Radius: 1.0902016
+  m_Center: {x: -0.05360222, y: 0.34457898, z: -0.19679117}
 --- !u!114 &1741423649663758833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,7 +407,8 @@ GameObject:
   - component: {fileID: 7431987082227475918}
   - component: {fileID: 4372680082079788023}
   - component: {fileID: 1582538758947848640}
-  - component: {fileID: 5950188527526373636}
+  - component: {fileID: 1854346847247012652}
+  - component: {fileID: 1042831620268588973}
   m_Layer: 8
   m_Name: EnemyLamp
   m_TagString: Enemy
@@ -461,9 +462,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08bdd76672f17634ab5d617da096735d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startSpeed: 10
+  startSpeed: 5
   hitDamage: 10
-  speed: 10
+  speed: 5
   healthBar: {fileID: 777020116832122065}
   startHealth: 100
   dropMoney: 50
@@ -484,6 +485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetWp: {fileID: 0}
+  playerPos: {fileID: 0}
 --- !u!54 &537153566482267232
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -530,10 +532,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 10
+  m_Speed: 5
   m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
+  avoidancePriority: 25
+  m_AngularSpeed: 30
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -586,7 +588,53 @@ MonoBehaviour:
   canAtk: 0
   isAttacking: 0
   distanceToTarget: 3
---- !u!114 &5950188527526373636
+--- !u!114 &1854346847247012652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9217589545309291490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52140ae85860d4a4785b68c49c3d6344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Method: 3
+  m_Curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0000057294965
+      value: 0
+      inSlope: 1.0216666
+      outSlope: 1.0216666
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.48940212
+      value: 0.5
+      inSlope: -1.1440953
+      outSlope: -1.1440953
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.6535644
+    - serializedVersion: 3
+      time: 1.0055457
+      value: 0
+      inSlope: -0.008847018
+      outSlope: -0.008847018
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.27701727
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1042831620268588973
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -694,7 +742,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.75
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -730,15 +778,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 3d88c319821b89f4086eb24c6b2faee2, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.04
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 3d88c319821b89f4086eb24c6b2faee2, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.04
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 3d88c319821b89f4086eb24c6b2faee2, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.04
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 3d88c319821b89f4086eb24c6b2faee2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -783,7 +831,11 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: 3d88c319821b89f4086eb24c6b2faee2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 2df1c6dae4d599e4481e9e670601bf30, type: 2}
+      objectReference: {fileID: 4344973837804985035, guid: cbfd2af366cc32c409c785e6d287b7b6, type: 3}
+    - target: {fileID: 3300000, guid: 3d88c319821b89f4086eb24c6b2faee2, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -5534212621762556924, guid: cbfd2af366cc32c409c785e6d287b7b6, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d88c319821b89f4086eb24c6b2faee2, type: 3}
 --- !u!1 &2504792591112514246 stripped

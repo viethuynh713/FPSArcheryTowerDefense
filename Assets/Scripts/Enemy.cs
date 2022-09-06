@@ -41,7 +41,9 @@ public class Enemy : MonoBehaviour
     // private float burnTime = 3f;
     private float currentBurnTime;
 
-    
+    [Header("Take Dmg Counter")]
+    int takeDmgCount = 0;
+
 
     void Start()
     {
@@ -86,6 +88,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage, bool isHead)
     {
 
+
         if (isHead)
         {
             health = 0;
@@ -96,6 +99,14 @@ public class Enemy : MonoBehaviour
             health -= damage;
 
             healthBar.fillAmount = health / startHealth;
+
+            takeDmgCount++;
+            Debug.Log(takeDmgCount);
+            if(takeDmgCount >= 2)
+            {
+                gameObject.GetComponent<EnemyMovement>().AttackPlayer();
+                Debug.Log("run AtkPlayer!");
+            }
 
         }
         if (health <= 0 && !isDead)

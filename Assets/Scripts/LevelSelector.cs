@@ -9,9 +9,11 @@ public class LevelSelector : MonoBehaviour
 
     public Button[] levelButtons;
 
+    int levelReached;
+
     void Start()
     {
-        int levelReached = PlayerPrefs.GetInt("levelReached", 1);
+        levelReached = GameManager.instance.maxLevelReach;
 
         for(int i = 0; i < levelButtons.Length; i++)
         {
@@ -26,6 +28,6 @@ public class LevelSelector : MonoBehaviour
     public void Select(string levelName)
     {
         sceneFader.FadeTo(levelName);
-
+        Time.timeScale = 1f;
     }
 }

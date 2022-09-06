@@ -20,7 +20,6 @@ public class EnemyAttackMelee : EnemyAttack
         
         if (Vector3.Distance(transform.position, GetComponent<EnemyMovement>().targetWp.position) <= distanceToTarget && canAtk == false && isAttacking == false)
         {
-            Debug.Log("Close enough to atk");
 
             canAtk = true;
             
@@ -51,6 +50,13 @@ public class EnemyAttackMelee : EnemyAttack
                 // Debug.Log("Chem");
                 GameManager.instance.CastleTakeDamage(enemyAttackDmg);
             }
+
+            if(nearyby.gameObject.tag == "Player")
+            {
+                Debug.Log("Chem trung Player");
+                GameManager.instance.PlayerTakeDamage(enemyAttackDmg);
+            }
         }
+
     }
 }

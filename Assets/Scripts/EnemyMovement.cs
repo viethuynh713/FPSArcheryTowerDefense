@@ -10,23 +10,30 @@ public class EnemyMovement : MonoBehaviour
     
     int waypointIndex;
     public Transform targetWp;
+    public Transform playerPos;
+
+    public Transform currentWaypoints;
+
+    bool chasingPlayer = false;
     
-
-
-
     public void Start()
     {
 
         targetWp = Waypoints.points[0];
+
+        playerPos = GameManager.instance.playerGO.transform;
         
         agent = GetComponent<NavMeshAgent>();
 
         UpdatePath();
     }
 
-    void Update()
+    private void Update()
     {
-        
+        if (chasingPlayer)
+        {
+            agent.SetDestination(targetWp.position);
+        }
     }
 
     void UpdatePath()
@@ -35,6 +42,14 @@ public class EnemyMovement : MonoBehaviour
         agent.SetDestination(targetWp.position);
     }
 
+    public void AttackPlayer()
+    {
+        Debug.Log("AttackPlayer!");
+        targetWp = playerPos;
+        agent.SetDestination(targetWp.position);
+        chasingPlayer = true;
+    }
+    
 
 
 

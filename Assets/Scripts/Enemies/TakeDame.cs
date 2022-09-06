@@ -9,6 +9,9 @@ public class TakeDame : MonoBehaviour
     public collisionType type;
     [SerializeField]
     private float damage = 10f;
+
+    
+    
     private void OnTriggerEnter(Collider other)
     {
             Enemy enemy = gameObject.GetComponentInParent<Enemy>();
@@ -18,6 +21,7 @@ public class TakeDame : MonoBehaviour
                 enemy.Slowdown();
                 enemy.TakeDamage(damage, type == collisionType.head ? true : false);
                 Destroy(other);
+                
             }
             if (other.tag == "FireArrow")
             {
@@ -30,7 +34,7 @@ public class TakeDame : MonoBehaviour
             if (other.tag == "NormalArrow")
             {
                 enemy.TakeDamage(damage, type == collisionType.head ? true : false);
-                Destroy(other);
+                other.gameObject.SetActive(false);
                 
             }
 
